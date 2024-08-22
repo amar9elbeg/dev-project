@@ -1,3 +1,11 @@
+import Header from "./components/header/Header";
+import LogOutButton from "./components/header/LogOutButton";
+import UserAccount from "./components/header/UserAccount";
+
 export default function Home() {
-  return <h1>Home</h1>
+  return( 
+  <div className="min-h-screen flex justify-center items-start">
+        <Header/>
+  </div>
+  )
 }
