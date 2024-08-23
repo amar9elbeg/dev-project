@@ -18,6 +18,7 @@ const config = {
       },
     },
     extend: {
+      
       fontFamily: {
         GIP: ['GIP', 'sans-serif'],
       },
@@ -55,6 +56,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        customGray: '#F4F4F4',
       },
       borderRadius: {
         lg: "var(--radius)",
