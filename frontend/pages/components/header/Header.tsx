@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator"
 
 const Header = () => {
   return (
-    <div className='w-full h-16 flex justify-between items-center p-5 box-content bg-white'>
+    <div className='w-full h-16 flex justify-between items-center py-5 px-10 box-content bg-white'>
         <div className='flex justify-start gap-2'>
             <CompanyLogo/>
         </div>
