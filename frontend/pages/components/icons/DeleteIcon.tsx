@@ -9,5 +9,13 @@ const DeleteIcon = () => {
   )
 }
 
+// describe('DeleteIcon Component', () => {
+//     it('renders without crashing', () => {
+//       render(<DeleteIcon />);
+      
+//       // Check if the SVG element is present in the document
+//       expect(screen.getByRole('img')).toBeInTheDocument();
+//     });
+
 export default DeleteIcon
 
