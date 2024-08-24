@@ -17,7 +17,7 @@ interface DatePickerProps {
   id?: string
 }
 
-const DatePicker= ({ name, ...props } : DatePickerProps) => {
+export const DatePicker= ({ name, ...props } : DatePickerProps) => {
   const [field, meta, helpers] = useField(name);
   const { value } = field;
   const { setValue } = helpers;
@@ -40,7 +40,7 @@ const DatePicker= ({ name, ...props } : DatePickerProps) => {
             {value ? format(new Date(value), "PPP") : <span>Огноо оруулна уу.</span>}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
+        <PopoverContent className="max-w-full p-0" align='start'>
           <Calendar
             mode="single"
             selected={value ? new Date(value) : undefined}
@@ -56,5 +56,3 @@ const DatePicker= ({ name, ...props } : DatePickerProps) => {
     </div>
   );
 };
-
-export default DatePicker;

@@ -5,12 +5,12 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-import ClassCardMenuIcon from '../icons/ClassCardMenuIcon'
-import EditIcon from '../icons/EditIcon'
-import DeleteIcon from '../icons/DeleteIcon'
+import ClassCardMenuIcon from '../../components/icons/ClassCardMenuIcon'
+import EditIcon from '../../components/icons/EditIcon'
+import DeleteIcon from '../../components/icons/DeleteIcon'
   
 
-const ClassCardMenu = () => {
+export const ClassCardMenu = () => {
   return (
     <DropdownMenu>
     <DropdownMenuTrigger> <ClassCardMenuIcon/> </DropdownMenuTrigger>
@@ -28,4 +28,3 @@ const ClassCardMenu = () => {
   )
 }
 
-export default ClassCardMenu

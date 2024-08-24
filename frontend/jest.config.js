@@ -11,7 +11,11 @@ const createJestConfig = nextJest({
 const config = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jest-environment-jsdom',
+  rootDir: './',
   preset: "ts-jest",
+  transform: {
+    "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
+  },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   collectCoverage: true,
   collectCoverageFrom: [

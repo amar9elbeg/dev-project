@@ -5,7 +5,7 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
 
-const UserAccount = (props: { avatarPicUrl: string, userName: string}) => {
+export const UserAccount = (props: { avatarPicUrl: string, userName: string}) => {
     const {avatarPicUrl, userName} =props
   return (
     <div className='flex items-center h-8 gap-2'>

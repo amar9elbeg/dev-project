@@ -10,7 +10,7 @@ interface MyTextInputProps {
     id?: string
   }
 
-const AddClassInput = ({ label, ...props }:MyTextInputProps) => {
+export const Input = ({ label, ...props }:MyTextInputProps) => {
 
     const [field, meta] = useField(props);
     return (
@@ -23,5 +23,3 @@ const AddClassInput = ({ label, ...props }:MyTextInputProps) => {
       </div>
     );
   };
-
-export default AddClassInput

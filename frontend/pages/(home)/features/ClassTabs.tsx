@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from '@/components/ui/separator'
 
 
-const ClassTabs = () => {
+export const ClassTabs = () => {
   return (
     <div className='w-full flex items-center'>
         <Tabs defaultValue="account" className="w-[400px] ">
@@ -20,5 +20,3 @@ const ClassTabs = () => {
     </div>
   )
 }
-
-export default ClassTabs
