@@ -16,6 +16,7 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      data-testid="calendar-dialog"
       className={cn("p-2", className)}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",

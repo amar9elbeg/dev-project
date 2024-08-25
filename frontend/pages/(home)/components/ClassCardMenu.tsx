@@ -5,22 +5,20 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-import ClassCardMenuIcon from '../../components/icons/ClassCardMenuIcon'
-import EditIcon from '../../components/icons/EditIcon'
-import DeleteIcon from '../../components/icons/DeleteIcon'
+import { Delete, Edit, Ellipsis, MenuIcon } from 'lucide-react'
   
 
 export const ClassCardMenu = () => {
   return (
     <DropdownMenu>
-    <DropdownMenuTrigger> <ClassCardMenuIcon/> </DropdownMenuTrigger>
+    <DropdownMenuTrigger data-testid='menu-icon'> <Ellipsis/></DropdownMenuTrigger>
     <DropdownMenuContent align='end'>
         <DropdownMenuItem className='flex justify-start gap-3'>
-            <EditIcon/>
+            <Edit className='w-4 h-4' data-testid='edit-icon'/>
             <p>Засах</p>
         </DropdownMenuItem>
         <DropdownMenuItem className='flex justify-start gap-3'>
-            <DeleteIcon/>
+            <Delete className='w-4 h-4' data-testid='delete-icon'/>
             <p>Устгах</p>
         </DropdownMenuItem>
     </DropdownMenuContent>

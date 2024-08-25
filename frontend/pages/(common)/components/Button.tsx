@@ -18,9 +18,13 @@ export const Button = ({ text, buttonVariant = "default", value, setValue, disab
       type="submit" 
       className="text-lg gap-2" 
       disabled={disabled}
-      onClick={() => setValue(!value)}
+      onClick={() => {
+        if (disabled === false || disabled === undefined) {
+          setValue(!value);        }
+      }}
     > 
       {text}
     </ShadcnButton>
   )
 }
+

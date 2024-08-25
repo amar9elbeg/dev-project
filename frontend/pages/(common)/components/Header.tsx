@@ -1,5 +1,5 @@
 import React from 'react'
-import CompanyLogoIcon from '@/pages/components/icons/CompanyLogoIcon'
+import {CompanyLogoIcon} from '@/pages/components/icons/CompanyLogoIcon'
 import UserAccount from './UserAccount'
 import { Separator } from "@/components/ui/separator"
 import Link from 'next/link'
@@ -17,7 +17,7 @@ export const Header = () => {
       </div>
 
       <div className='flex justify-end gap-2 items-center h-full '>
-        <UserAccount avatarPicUrl="" userName="Dulguun Batbaatar" />
+        <UserAccount avatarPicUrl="https://picsum.photos/200" userName="Dulguun Batbaatar" />
         <Separator orientation="vertical" className='h-8' />
         <Button variant="ghost" asChild>
         <Link href="/">
