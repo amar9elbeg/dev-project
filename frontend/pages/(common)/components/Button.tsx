@@ -6,16 +6,18 @@ interface ButtonProps {
   buttonVariant?: ButtonVariant;
   value: boolean;
   setValue: Dispatch<SetStateAction<boolean>>;
+  disabled?: boolean;
 }
 
 type ButtonVariant = "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
 
-export const Button = ({ text, buttonVariant = "default", value, setValue }: ButtonProps) => {
+export const Button = ({ text, buttonVariant = "default", value, setValue, disabled }: ButtonProps) => {
   return (
     <ShadcnButton 
       variant={buttonVariant} 
       type="submit" 
       className="text-lg gap-2" 
+      disabled={disabled}
       onClick={() => setValue(!value)}
     > 
       {text}
