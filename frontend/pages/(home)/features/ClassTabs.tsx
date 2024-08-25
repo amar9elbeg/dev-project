@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator'
 export const ClassTabs = () => {
   return (
     <div className='w-full flex items-center'>
-        <Tabs defaultValue="account" className="w-[400px] ">
+        <Tabs defaultValue="all" className="w-[400px] ">
             <TabsList className='bg-customGray border border-gray-150'>
                 <TabsTrigger className='w-32' value="all">Бүгд</TabsTrigger>
                 <Separator orientation='vertical' className='h-full'/>

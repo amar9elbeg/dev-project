@@ -14,7 +14,7 @@ export const ClassCardMenu = () => {
   return (
     <DropdownMenu>
     <DropdownMenuTrigger> <ClassCardMenuIcon/> </DropdownMenuTrigger>
-    <DropdownMenuContent>
+    <DropdownMenuContent align='end'>
         <DropdownMenuItem className='flex justify-start gap-3'>
             <EditIcon/>
             <p>Засах</p>

@@ -4,16 +4,14 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger, DialogFooter,
+  DialogFooter,
   DialogClose
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import {  Form, useFormik } from 'formik';
+import { Formik, Form, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Input } from '@/pages/(common)/components/Input';
 import { DatePicker } from '@/pages/(common)/components/DatePicker';
-import { RightVector } from '@/pages/components/icons/RightVector';
-import { ButtonComponent } from '@/pages/(common)/components/ButtonComponent';
+import { Button } from '@/pages/(common)/components/Button';
 
 
 interface AddClassModal {
@@ -23,31 +21,28 @@ interface AddClassModal {
 
 export const AddClassModal = ({...props} :  AddClassModal) => {
     const {value, setValue} = props
-    const formik = useFormik({
-        initialValues: {
-          className: '',
-          teacherName1: '',
-          teacherName2: '',
-          startDate: '',
-          endDate: '',
-        },
-        validationSchema: Yup.object({
-          className: Yup.string().min(2, "Must be 2 characters or more")
-          .max(15, 'Must be 15 characters or less')
-          .required('Required'),
-        teacherName1: Yup.string().min(2, "Must be 2 characters or more")
-          .max(20, 'Must be 20 characters or less')
-          .required('Required'),
-        teacherName2: Yup.string().min(2, "Must be 2 characters or more")
-          .max(20, 'Must be 20 characters or less')
-          .required('Required'),
-        startDate: Yup.string().required('Required'),
-        endDate: Yup.string().required('Required'),
-        }),
-        onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
-        },
-      });
+    const classDataInitialValue ={
+      className: '',
+      teacherName1: '',
+      teacherName2: '',
+      startDate: '',
+      endDate: '',
+    }
+
+    const classDataValidation = Yup.object({
+      className: Yup.string().min(2, "Must be 2 characters or more")
+      .max(15, 'Must be 15 characters or less')
+      .required('Required'),
+    teacherName1: Yup.string().min(2, "Must be 2 characters or more")
+      .max(20, 'Must be 20 characters or less')
+      .required('Required'),
+    teacherName2: Yup.string().min(2, "Must be 2 characters or more")
+      .max(20, 'Must be 20 characters or less')
+      .required('Required'),
+    startDate: Yup.string().required('Required'),
+    endDate: Yup.string().required('Required'),
+    })
+
 
   return (
     <div>
@@ -57,7 +52,12 @@ export const AddClassModal = ({...props} :  AddClassModal) => {
             <DialogTitle>Анги нэмэх</DialogTitle>
           </DialogHeader>
           <div className=" gap-10 my-5">
-              <Form onSubmit={formik.handleSubmit}>
+            <Formik 
+              initialValues={classDataInitialValue} 
+              validationSchema={classDataValidation} 
+              onSubmit={(values) => {console.log(values);
+              }}>
+              <Form>
                 <Input
                   label="Ангиин нэр:"
                   name="className"
@@ -82,10 +82,11 @@ export const AddClassModal = ({...props} :  AddClassModal) => {
                 </div>
                 <DialogFooter>
                   <DialogClose asChild>
-                    <ButtonComponent text="Хадгалах" value={value} setValue={setValue} />
+                    <Button text="Хадгалах" value={value} setValue={setValue} />
                   </DialogClose>
                 </DialogFooter>
               </Form>
+            </Formik>
 
           </div>
 

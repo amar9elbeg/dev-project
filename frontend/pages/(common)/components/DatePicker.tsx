@@ -40,12 +40,11 @@ export const DatePicker= ({ name, ...props } : DatePickerProps) => {
             {value ? format(new Date(value), "PPP") : <span>Огноо оруулна уу.</span>}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="max-w-full p-0" align='start'>
+        <PopoverContent className="w-[220px] flex justify-center p-0" align='start'>
           <Calendar
             mode="single"
             selected={value ? new Date(value) : undefined}
             onSelect={(date) => setValue(date ? date.toISOString() : '')}
-            initialFocus
           />
         </PopoverContent>
       </Popover>

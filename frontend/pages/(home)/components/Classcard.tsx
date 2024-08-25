@@ -19,7 +19,7 @@ interface ClassCardProps {
 }
 
 export const Classcard = (props: ClassCardProps) => {
-    const { } = props
+    const { className, startDate, endDate,teacherName1, teacherName2} = props
     return (
         <div>
             <Card className='w-full'>
