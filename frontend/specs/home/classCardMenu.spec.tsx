@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ClassCardMenu } from '../../pages/(home)/components/ClassCardMenu';
-import { Ellipsis, Edit, Delete } from 'lucide-react';
 
 describe('ClassCardMenu Home Component', () => {
   it('renders the Ellipsis icon in the DropdownMenuTrigger', () => {
