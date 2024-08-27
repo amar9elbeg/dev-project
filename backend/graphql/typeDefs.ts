@@ -1,6 +1,8 @@
 import { gql } from 'graphql-tag'
 
 export const typeDefs = gql`
+    scalar Date
+
     type User {
         firstName: String
         secondName: String
@@ -24,24 +26,19 @@ export const typeDefs = gql`
     }
     
     type Class {
-        classId: ID
         name: String!
         teachers: [String]
         endDate: Date!
-        startDate: date!
+        startDate: Date!
         type: ClassType!
     }
 
-    input classId {
-        classId: String
-    }
 
     input CreateClassInput {
-        classId: ID
         name: String!
         teachers: [String]
         endDate: Date!
-        startDate: date!
+        startDate: Date!
         type: ClassType!
 
     }
@@ -49,14 +46,15 @@ export const typeDefs = gql`
     type Query {
         getUser: User
         getUsers: [User]
-        getClass(): [Class]
-        getClassById(classId: ID!): Class
+        # getClass(): [Class]
+        # getClassById(classId: ID!): Class
     }
 
     type Mutation {
         createUser(input: CreateUserInput!): User
         updateUser(input: UpdateUserInput): User
-        editClass (classId: ID!, classInput: CreateClassInput): Boolean
-        deleteClass(classId: ID!): Boolean
+        createClass(input: CreateClassInput) : Class
+        # editClass (classId: ID!, classInput: CreateClassInput): Boolean
+        # deleteClass(classId: ID!): Boolean
     }
 `

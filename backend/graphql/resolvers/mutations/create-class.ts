@@ -1,9 +1,9 @@
 import { ClassModel } from "@/mongodb/class"
 
-export const createClass = async (req: Request, res: Response) => {
-    const {input}
+export const createClass = async (_: any, { input }: any) => {
+    console.log('hi');
     
-    const user = await ClassModel.create(input)
+    const classData = await ClassModel.create(input)
 
-    return user
+    return classData
 }
