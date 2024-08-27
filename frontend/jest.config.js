@@ -10,7 +10,7 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const config = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jest-environment-jsdom-fourteen',
   rootDir: './',
   preset: "ts-jest",
   transform: {
@@ -21,6 +21,7 @@ const config = {
   collectCoverageFrom: [
     '!**/*.{js,jsx,ts,tsx}',
     '**/components/**/*.{js,jsx,ts,tsx}',
+    '!**/components/ui/*.{js,jsx,ts,tsx}',
     '!**/node_modules/**',
     '!**/.next/**',
     '!**/out/**',

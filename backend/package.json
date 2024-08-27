@@ -9,9 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/subgraph": "^2.8.4",
+    "@apollo/utils.keyvaluecache": "^3.1.0",
+    "apollo-server-cloud-functions": "^3.13.0",
+    "graphql": "^16.9.0",
+    "graphql-tag": "^2.12.6",
+    "mongoose": "^8.5.4",
+    "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.5"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "typescript": "^5",

@@ -17,7 +17,7 @@ interface DatePickerProps {
   id?: string
 }
 
-export const DatePicker= ({ name, ...props } : DatePickerProps) => {
+export const DatePicker = ({ name, ...props }: DatePickerProps) => {
   const [field, meta, helpers] = useField(name);
   const { value } = field;
   const { setValue } = helpers;
@@ -27,16 +27,16 @@ export const DatePicker= ({ name, ...props } : DatePickerProps) => {
     <div className='flex w-full flex-col gap-1 h-28'>
       <label className=' leading-6 tracking-tight' htmlFor={props.id || name}>{props.label}</label>
       <Popover>
-        <PopoverTrigger asChild data-testid="date-input-button">
+        <PopoverTrigger asChild >
           <Button
             variant={"outline"}
             className={cn(
               "w-full bg-gray-100 h-12 justify-start text-left font-normal",
               !value && "text-muted-foreground"
             )}
-            onClick={()=>setFieldTouched(name,true)}
-            
-            >
+            onClick={() => setFieldTouched(name, true)}
+            data-testid="date-input-button"
+          >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {value ? format(new Date(value), "PPP") : <span>Огноо оруулна уу.</span>}
           </Button>
@@ -45,15 +45,14 @@ export const DatePicker= ({ name, ...props } : DatePickerProps) => {
           <Calendar
             mode="single"
             selected={value ? new Date(value) : undefined}
-            onSelect={(date) => setValue(date ? date.toISOString() : '')}
+            onSelect={(date) => setValue(date?.toISOString())}
             data-testid="calendar-dialog"
-
           />
         </PopoverContent>
       </Popover>
       {meta.touched && meta.error ? (
-          <div className="error text-red-500 text-xs">{meta.error}</div>
-        ) : null}
+        <div className="error text-red-500 text-xs">{meta.error}</div>
+      ) : null}
 
     </div>
   );

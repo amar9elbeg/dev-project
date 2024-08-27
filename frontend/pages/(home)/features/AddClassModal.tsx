@@ -7,12 +7,12 @@
     DialogFooter,
     DialogClose
   } from "@/components/ui/dialog";
-  import { Formik, Form } from 'formik';
+  import { Formik, Form, Field } from 'formik';
   import * as Yup from 'yup';
   import { Input } from '@/pages/(common)/components/Input';
   import { DatePicker } from '@/pages/(common)/components/DatePicker';
   import { Button } from '@/pages/(common)/components/Button';
-import { ArrowRight } from 'lucide-react';
+
 
   interface AddClassModal {
       value: boolean;
@@ -27,6 +27,7 @@ import { ArrowRight } from 'lucide-react';
         teacherName2: '',
         startDate: '',
         endDate: '',
+        classType: "coding",
       }
 
       const classDataValidation = Yup.object({
@@ -41,6 +42,9 @@ import { ArrowRight } from 'lucide-react';
           .required('Required'),
         startDate: Yup.string().required('Required'),
         endDate: Yup.string().required('Required'),
+        classType: Yup.string()
+        .oneOf(['coding', 'design'], 'Invalid class type')
+        .required('Required')
       });
 
     return (
@@ -56,11 +60,8 @@ import { ArrowRight } from 'lucide-react';
                 validationSchema={classDataValidation} 
                 onSubmit={(values) => { console.log(values); }}
               >
-                {({ isValid }) => {
-                  console.log('isvalid initial', isValid);
-                  
+                {({ isValid, values }) => {
                   return(
-   
                   <Form>
                     <Input
                       label="Ангиин нэр:"
@@ -84,7 +85,17 @@ import { ArrowRight } from 'lucide-react';
                       <DatePicker label="Эхлэх огноо:" name="startDate" />
                       <DatePicker label="Дуусах огноо:" name="endDate" />
                     </div>
-                    <DialogFooter>
+                    <div role="group" aria-labelledby="my-radio-group" className='grid grid-cols-2 gap-x-5'>
+                        <label className={`border rounded-md py-2 px-2 ${values.classType=='coding' ? 'bg-gray-100 border-gray-300' : "border-gray-100"}`}>
+                          <Field type="radio" name="classType" value="coding" />
+                          <span className='ml-2'>Кодинг анги</span>
+                        </label>
+                        <label className={`border rounded-md py-2 px-2 ${values.classType=='design' ? 'bg-gray-100 border-gray-300' : "border-gray-100"}`}>
+                          <Field type="radio" name="classType" value="design" />
+                          <span className='ml-2'>Дизайн анги</span>
+                        </label>
+                      </div>
+                    <DialogFooter className='mt-5'>
                       <DialogClose asChild>
                         <Button 
                           text={`Хадгалах`}

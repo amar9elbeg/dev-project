@@ -4,12 +4,15 @@ import { Classcard } from "./components/Classcard";
 import { ClassTabs } from "./features/ClassTabs";
 import { Header } from "../(common)/components/Header";
 import { Button } from "../(common)/components/Button";
+import { AdjustClassModal } from "./features/AdjustClassModal";
 {}
 
 
 
 export const HomePage=()=> {
   const [openAddClassModal, setOpenAddClassModal] = useState(false)
+  const [openAdjustClassModal, setOpenAdjustClassModal] = useState(false)
+
   
   return (
     <div className="min-h-screen w-full flex justify-center items-start bg-customGray">
@@ -31,6 +34,7 @@ export const HomePage=()=> {
 
       </div>
       <AddClassModal value={openAddClassModal} setValue={setOpenAddClassModal} />
+      <AdjustClassModal value={openAdjustClassModal} setValue={setOpenAdjustClassModal}/>
 
     </div>
   )
