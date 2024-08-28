@@ -1,7 +1,8 @@
-import { getUser } from './queries'
-import { createUser } from './mutations'
+import { getClass, getClassById } from './queries'
+import { createClass } from './mutations'
+
 
 export const resolvers = {
-    Query: { getUser },
-    Mutation: { createUser }
+    Query: { getClass , getClassById },
+    Mutation: { createClass }
 } as any

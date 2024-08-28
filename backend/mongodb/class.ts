@@ -22,5 +22,4 @@ const ClassSchema = new Schema({
         required: [true, "please insert class type"],
     }})
 
-// export const ClassModel = mongoose.model('class', ClassSchema);
 export const ClassModel = mongoose.models.class || mongoose.model('class', ClassSchema);
