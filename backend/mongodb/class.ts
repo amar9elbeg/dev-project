@@ -20,6 +20,12 @@ const ClassSchema = new Schema({
         type: String,
         enum: ['CODING', 'DESIGN'],
         required: [true, "please insert class type"],
+    },
+    createdAt: {
+        type: Date
+    },
+    updatedAt: {
+        type: Date
     }})
 
 export const ClassModel = mongoose.models.class || mongoose.model('class', ClassSchema);
