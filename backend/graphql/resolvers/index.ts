@@ -13,9 +13,12 @@ import { getTopicById } from './queries/get-topicById'
 import { createTopic } from './mutations/create-topic'
 import { editTopic } from './mutations/edit-topic'
 import { deleteTopic } from './mutations/delete-topic'
+import { getAttendanceByDate } from './queries/get-attendanceByDate'
+import { editAttendance } from './mutations/edit-attendance'
+import { createAttendance } from './mutations/create-attendance'
 
 
 export const resolvers = {
-    Query: { getClass , getClassById, getStudentById, getStudentsByClassId, getTopic, getTopicById },
-    Mutation: { createClass , editClass, deleteClass, createStudent,editStudent ,deleteStudent, createTopic, editTopic, deleteTopic}
+    Query: { getClass , getClassById, getStudentById, getStudentsByClassId, getTopic, getTopicById, getAttendanceByDate },
+    Mutation: { createClass , editClass, deleteClass, createStudent,editStudent ,deleteStudent, createTopic, editTopic, deleteTopic, editAttendance, createAttendance}
 } as any

@@ -1,3 +1,4 @@
+import { createAttendance } from './resolvers/mutations/create-attendance';
 import { gql } from 'graphql-tag'
 import { StudentModel } from './../mongodb/student';
 import { getClassById } from './resolvers/queries/get-classById';
@@ -80,25 +81,18 @@ export const typeDefs = gql`
         SICK 
     }
 
-
-
     type Attendance {
         attendanceId: ID
         classId: ID
         studentId: ID
+        date: Date
         createdAt: Date
         status: AttendanceStatus
     }
 
-    input CreateStudentAttendance {
+    input CreateAttendanceInput {
         classId: ID!
         studentId: ID!
-        date: Date!
-        status: AttendanceStatus!
-    }
-
-    input UpdateStudentAttendance {
-        attendanceId: ID
         date: Date!
         status: AttendanceStatus!
     }
@@ -131,7 +125,7 @@ export const typeDefs = gql`
         createTopic(input: CreateTopicInput!): Topic
         editTopic(topicId: ID!, topicInput: CreateTopicInput): Boolean
         deleteTopic(topicId: ID!): Boolean
-        createAttendance(inputs: CreateStudentAttendance): Attendance
-        updateAttendance(inputs: UpdateStudentAttendance): Attendance
+        createAttendance(input: CreateAttendanceInput): Attendance
+        editAttendance(attendanceId: ID!, attendanceInput: CreateAttendanceInput): Attendance
     }
 `

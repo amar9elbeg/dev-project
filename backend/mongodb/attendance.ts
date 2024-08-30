@@ -15,6 +15,10 @@ const AttendanceSchema = new Schema({
         type: String,
         enum: ['PRESENT', 'ABSENT','LATE', 'EXCUSED','SICK'],
         required: [true, "please insert attendance status"],
+    },    
+    date: {
+        type: Date,
+        required: [true, "please insert attendance date"],
     },
     createdAt: {
         type: Date,
