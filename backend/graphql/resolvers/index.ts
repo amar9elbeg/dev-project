@@ -1,6 +1,6 @@
 import {  getClassesQuery } from './queries'
 import {  getClassByIdQuery } from './queries/get-classById'
-import {  createClassMuattion } from './mutations'
+import {  createClassMutation } from './mutations'
 import {  editClassMutation } from './mutations/edit-class'
 import {  deleteClassMutation } from './mutations/delete-class'
 import { createStudentMutation } from './mutations/create-student'
@@ -28,7 +28,7 @@ export const resolvers = {
         getTopicByIdQuery, 
         getAttendanceByDateQuery },
     Mutation: { 
-        createClassMuattion , 
+        createClassMutation , 
         editClassMutation, 
         deleteClassMutation, 
         createStudentMutation,

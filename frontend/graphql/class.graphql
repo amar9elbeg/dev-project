@@ -1,0 +1,21 @@
+query GetClassesQuery {
+  getClassesQuery {
+    classId
+    name
+    teachers
+    endDate
+    startDate
+    type
+  }
+}
+
+mutation CreateClassMutation($input: CreateClassInput!) {
+  createClassMutation(input: $input) {
+    classId
+    name
+    teachers
+    endDate
+    startDate
+    type
+  }
+}

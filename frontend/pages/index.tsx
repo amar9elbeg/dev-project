@@ -3,8 +3,6 @@ import { AddClassModal } from "./(home)/features/AddClassModal";
 import { Classcard } from "./(home)/components/Classcard";
 import { ClassTabs } from "./(home)/features/ClassTabs";
 import { Header } from "./(common)/components/Header";import { HomePage } from "./(home)/HomePage";
-{}
-
 
 
 export default function Home() {

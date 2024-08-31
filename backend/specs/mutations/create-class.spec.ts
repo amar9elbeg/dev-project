@@ -1,4 +1,4 @@
-import { createClassMuattion } from './../../graphql/resolvers/mutations/create-class';
+import { createClassMutation } from './../../graphql/resolvers/mutations/create-class';
 import { ClassModel } from '@/mongodb/class';
 
 jest.mock('../../mongodb/class.ts', () => ({
@@ -15,7 +15,7 @@ const createData = {
 describe('create class', () => {
     it('Should return created class ', async () => {
         (ClassModel.create as jest.Mock).mockResolvedValue(createData)
-        const result = await createClassMuattion(null, { createData })
+        const result = await createClassMutation(null, { createData })
         expect(result).toEqual(createData)
   
     })
