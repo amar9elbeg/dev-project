@@ -1,8 +1,7 @@
 
 import { AttendanceModel } from "@/mongodb/attendance";
 
-export const createAttendance = async (_: any, { input }: any) => {
-  try {
+export const createAttendanceMutation = async (_: any, { input }: any) => {
     const currentTimestamp = new Date();
 
     const attendanceData = await AttendanceModel.create({
@@ -10,11 +9,8 @@ export const createAttendance = async (_: any, { input }: any) => {
       createdAt: currentTimestamp,
       updatedAt: currentTimestamp,
     });
-    console.log(attendanceData);
+
 
 
     return attendanceData;
-  } catch (error) {
-    console.error("Error creating class:", error);
-  }
 };

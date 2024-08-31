@@ -1,11 +1,9 @@
 import { ClassModel } from "@/mongodb/class"
 
-export const editClass = async (_: any, { classInput, classId }: any) =>{
-    try {
+export const editClassMutation = async (_: any, { classInput, classId }: any) =>{
+    
         const classData = await ClassModel.findByIdAndUpdate(classId,{...classInput,  updatedAt: new Date()})
-        return true
-    } catch (error) {
-        return error
-    }
+        return classData
+ 
 
 }

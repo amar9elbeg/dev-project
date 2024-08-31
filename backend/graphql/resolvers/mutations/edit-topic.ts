@@ -1,12 +1,8 @@
 import { TopicModel } from "@/mongodb/topic"
 
-export const editTopic = async (_: any, { topicInput, topicId }: any) =>{
-    try {
+export const editTopicMutation = async (_: any, { topicInput, topicId }: any) =>{
         
         const topicData = await TopicModel.findByIdAndUpdate(topicId,{...topicInput,  updatedAt: new Date()})
-        return true
-    } catch (error) {
-        return error
-    }
+        return topicData
 
 }

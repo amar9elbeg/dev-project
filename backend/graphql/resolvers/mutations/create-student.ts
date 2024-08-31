@@ -1,6 +1,6 @@
 import { StudentModel } from "@/mongodb/student"
 
-export const createStudent = async (_: any, { input }: any) => {
+export const createStudentMutation = async (_: any, { input }: any) => {
     const currentTimestamp = new Date();
 
     const student = await StudentModel.create({

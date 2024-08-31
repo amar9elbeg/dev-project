@@ -1,7 +1,6 @@
 import { ClassModel } from "@/mongodb/class";
 
-export const createClass = async (_: any, { input }: any) => {
-  try {
+export const createClassMuattion = async (_: any, { input }: any) => {
     const currentTimestamp = new Date();
 
     const classData = await ClassModel.create({
@@ -9,11 +8,6 @@ export const createClass = async (_: any, { input }: any) => {
       createdAt: currentTimestamp,
       updatedAt: currentTimestamp,
     });
-    console.log(classData);
-
 
     return classData;
-  } catch (error) {
-    console.error("Error creating class:", error);
-  }
 };

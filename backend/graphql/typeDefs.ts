@@ -1,7 +1,4 @@
-import { createAttendance } from './resolvers/mutations/create-attendance';
 import { gql } from 'graphql-tag'
-import { StudentModel } from './../mongodb/student';
-import { getClassById } from './resolvers/queries/get-classById';
 
 export const typeDefs = gql`
     scalar Date

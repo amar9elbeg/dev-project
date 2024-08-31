@@ -1,8 +1,7 @@
 
 import { TopicModel } from "@/mongodb/topic";
 
-export const createTopic = async (_: any, { input }: any) => {
-  try {
+export const createTopicMutation = async (_: any, { input }: any) => {
     const currentTimestamp = new Date();
 
     const topicData = await TopicModel.create({
@@ -10,11 +9,8 @@ export const createTopic = async (_: any, { input }: any) => {
       createdAt: currentTimestamp,
       updatedAt: currentTimestamp,
     });
-    console.log(topicData);
 
 
     return topicData;
-  } catch (error) {
-    console.error("Error creating class:", error);
-  }
+
 };

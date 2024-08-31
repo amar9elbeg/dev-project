@@ -1,24 +1,42 @@
-import { getClass } from './queries'
-import { getClassById } from './queries/get-classById'
-import { createClass } from './mutations'
-import { editClass } from './mutations/edit-class'
-import { deleteClass } from './mutations/delete-class'
-import { createStudent } from './mutations/create-student'
-import { deleteStudent } from './mutations/delete-student'
-import { getStudentsByClassId } from './queries/get-studentsByClass'
-import { getStudentById } from './queries/get-studentById'
-import { editStudent } from './mutations/edit-student'
-import { getTopic } from './queries/get-topic'
-import { getTopicById } from './queries/get-topicById'
-import { createTopic } from './mutations/create-topic'
-import { editTopic } from './mutations/edit-topic'
-import { deleteTopic } from './mutations/delete-topic'
-import { getAttendanceByDate } from './queries/get-attendanceByDate'
-import { editAttendance } from './mutations/edit-attendance'
-import { createAttendance } from './mutations/create-attendance'
+import {  getClassesQuery } from './queries'
+import {  getClassByIdQuery } from './queries/get-classById'
+import {  createClassMuattion } from './mutations'
+import {  editClassMutation } from './mutations/edit-class'
+import {  deleteClassMutation } from './mutations/delete-class'
+import { createStudentMutation } from './mutations/create-student'
+import {  deleteStudentMutation } from './mutations/delete-student'
+import {  getStudentsByClassIdQuery } from './queries/get-studentsByClass'
+import {  getStudentByIdQuery } from './queries/get-studentById'
+import {  editStudentMutation } from './mutations/edit-student'
+import {  getTopicsQuery } from './queries/get-topic'
+import {  createTopicMutation } from './mutations/create-topic'
+import {  editTopicMutation } from './mutations/edit-topic'
+import {  deleteTopicMutation } from './mutations/delete-topic'
+import {  getAttendanceByDateQuery } from './queries/get-attendanceByDate'
+import {  editAttendanceMutation } from './mutations/edit-attendance'
+import {  createAttendanceMutation } from './mutations/create-attendance'
+import { getTopicByIdQuery } from './queries/get-topicById'
 
 
 export const resolvers = {
-    Query: { getClass , getClassById, getStudentById, getStudentsByClassId, getTopic, getTopicById, getAttendanceByDate },
-    Mutation: { createClass , editClass, deleteClass, createStudent,editStudent ,deleteStudent, createTopic, editTopic, deleteTopic, editAttendance, createAttendance}
+    Query: { 
+        getClassesQuery , 
+        getClassByIdQuery, 
+        getStudentByIdQuery, 
+        getStudentsByClassIdQuery, 
+        getTopicsQuery, 
+        getTopicByIdQuery, 
+        getAttendanceByDateQuery },
+    Mutation: { 
+        createClassMuattion , 
+        editClassMutation, 
+        deleteClassMutation, 
+        createStudentMutation,
+        editStudentMutation ,
+        deleteStudentMutation, 
+        createTopicMutation, 
+        editTopicMutation, 
+        deleteTopicMutation, 
+        editAttendanceMutation, 
+        createAttendanceMutation}
 } as any

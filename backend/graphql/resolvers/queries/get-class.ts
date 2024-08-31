@@ -1,6 +1,6 @@
 import { ClassModel } from "@/mongodb/class"
 
-export const getClass = async () => {
+export const getClassesQuery = async () => {
     const classData = await ClassModel.find({})
 
     return classData

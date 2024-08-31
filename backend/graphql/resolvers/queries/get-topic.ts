@@ -1,6 +1,6 @@
 import { TopicModel } from "@/mongodb/topic"
 
-export const getTopic = async () => {
+export const getTopicsQuery = async () => {
     const topics = await TopicModel.find({})
 
     return topics

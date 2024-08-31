@@ -1,8 +1,6 @@
 import { StudentModel } from "@/mongodb/student"
 
-export const getStudentById = async (_: any, { studentId }: any) => {
-    console.log("student id", studentId);
-    
+export const getStudentByIdQuery = async (_: any, { studentId }: any) => {    
     const studentData = await StudentModel.findById(studentId)
 
     return studentData

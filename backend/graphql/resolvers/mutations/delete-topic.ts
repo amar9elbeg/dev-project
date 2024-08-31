@@ -1,10 +1,8 @@
 import { TopicModel } from "@/mongodb/topic"
 
-export const deleteTopic = async (_: any, { topicId }: any) =>{
-    try {
+export const deleteTopicMutation = async (_: any, { topicId }: any) =>{
+
         const studentData = await TopicModel.findByIdAndDelete(topicId)
         return true
-    } catch (error) {
-        return error
-    }
+
 }
