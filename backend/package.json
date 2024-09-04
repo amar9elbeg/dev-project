@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test:watch": "jest --watchAll",
     "test": "jest",
-    "generate": "graphql-codegen"
+    "generate": "npm run graphql-codegen"
   },
   "dependencies": {
     "@apollo/subgraph": "^2.8.4",
