@@ -14,7 +14,7 @@ export const attendanceTypeDefs = gql`
     }
 
     type Attendance {
-        attendanceId: ID
+        _id: ID
         classId: ID
         studentId: ID
         date: Date

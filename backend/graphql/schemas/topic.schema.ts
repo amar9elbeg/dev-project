@@ -8,7 +8,7 @@ export const topicTypeDefs = gql`
     #Topic
 
     type Topic {
-        topicId: ID 
+        _id: ID
         name: String
         week: String
         active: Boolean

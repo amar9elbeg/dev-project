@@ -12,7 +12,7 @@ export const classTypeDefs = gql`
     }
     
     type Class {
-        classId: ID
+        _id: ID
         name: String!
         teachers: [String]
         endDate: Date!

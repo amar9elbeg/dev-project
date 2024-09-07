@@ -7,7 +7,7 @@ export const studentTypeDefs = gql`
     #Student
 
     type Student {
-        studentId: ID 
+        _id: ID 
         firstName: String
         lastName: String
         studentCode: String
