@@ -6,7 +6,7 @@ export const classDataInitialValue = {
     teacherName2: '',
     startDate: '',
     endDate: '',
-    classType: "CODING",
+    type: "CODING",
   }
   export type formikValue = {
     name: String,
@@ -14,7 +14,7 @@ export const classDataInitialValue = {
     teacherName2: String,
     startDate: String
     endDate: String,
-    classType: String
+    type: String
   }
   export const classDataValidation = Yup.object({
     name: Yup.string().min(2, "Must be 2 characters or more")
@@ -28,7 +28,7 @@ export const classDataInitialValue = {
       .required('Required'),
     startDate: Yup.string().required('Required'),
     endDate: Yup.string().required('Required'),
-    classType: Yup.string()
+    type: Yup.string()
       .oneOf(['CODING', 'DESIGN'], 'Invalid class type')
       .required('Required')
   });

@@ -1,20 +1,16 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-  DialogClose
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose
 } from "@/components/ui/dialog";
 import { classDataValidation, formikValue, classDataInitialValue } from './utils/ClassFormik';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { Input } from '@/pages/(common)/components/Input';
 import { DatePicker } from '@/pages/(common)/components/DatePicker';
 import { Button } from '@/pages/(common)/components/Button';
 import { useCreateClassMutationMutation } from "@/generated";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RadioButton } from '@/pages/(common)/components/RadioButton';
 
 interface AddClassModal {
   value: boolean;
@@ -22,25 +18,24 @@ interface AddClassModal {
 }
 export const AddClassModal = ({ ...props }: AddClassModal) => {
   const { value, setValue } = props;
-  const [radioValue, setRadioValue] =  useState('CODING')
-
   const [createClassMutation] = useCreateClassMutationMutation();
 
   const submitFunction = async (values: formikValue) => {
+    const { name, teacherName1, teacherName2, type, startDate, endDate } = values;
     const promise = createClassMutation({
       variables: {
         input: {
-          name: values.name,
-          teachers: [values.teacherName1, values.teacherName2],
-          type: values.classType,
-          startDate: values.startDate,
-          endDate: values.endDate,
+          name,
+          teachers: [teacherName1, teacherName2],
+          type,
+          startDate,
+          endDate
         }
       }
     });
     toast.promise(promise, {
       pending: 'Creating class ' + values.name,
-      success: values.name +' class created successfully!',
+      success: values.name + ' class created successfully!',
       error: 'Error creating class.',
     }, {
       autoClose: 2000,
@@ -64,9 +59,7 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
             <Formik
               initialValues={classDataInitialValue}
               validationSchema={classDataValidation}
-              onSubmit={(values) => {
-                submitFunction(values)
-              }}
+              onSubmit={(values) => { submitFunction(values) }}
             >
               {({ isValid, values }) => {
                 return (
@@ -94,14 +87,8 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
                       <DatePicker label="Дуусах огноо:" name="endDate" />
                     </div>
                     <div role="group" aria-labelledby="my-radio-group" className='grid grid-cols-2 gap-x-5'>
-                      <label className={`border rounded-md py-2 px-2 ${values.classType == 'CODING' ? 'bg-gray-100 border-gray-300' : "border-gray-100"} checked:bg-red-500`}>
-                        <Field type="radio" name="classType" value="CODING" />
-                        <span className='ml-2'>Кодинг анги</span>
-                      </label>
-                      <label className={`border rounded-md py-2 px-2 ${values.classType == 'DESIGN' ? 'bg-gray-100 border-gray-300' : "border-gray-100"}`}>
-                        <Field type="radio" name="classType" value="DESIGN" />
-                        <span className='ml-2'>Дизайн анги</span>
-                      </label>
+                      <RadioButton label='Кодинг анги' name='type' value='CODING' radioButtonValue={values.type} />
+                      <RadioButton label='Дизайн анги' name='type' value='DESIGN' radioButtonValue={values.type} />
                     </div>
                     <DialogFooter className='mt-5'>
                       <DialogClose asChild>

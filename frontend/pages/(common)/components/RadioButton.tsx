@@ -1,25 +1,25 @@
-import React from 'react'
-import {  useField } from 'formik';
+import React from 'react';
+import { useField } from 'formik';
 
+interface MyRadioButtonInputProps {
+  label: string;
+  name: string;
+  value: string;
+  radioButtonValue: string;
+}
 
-interface MyTextInputProps {
-    label: string;
-    name: string;
-    type: string;
-    placeholder?: string;
-    id?: string
-  }
+export const RadioButton = ({ label, radioButtonValue, ...props}: MyRadioButtonInputProps) => {
+  const [field] = useField({ name: props.name, value: props.value });
 
-export const Input = ({ label, ...props }:MyTextInputProps) => {
-
-    const [field, meta] = useField(props);
-    return (
-      <div className='w-full flex flex-col gap-1 h-28'>
-        <label className=' leading-6 tracking-tight' htmlFor={props.id || props.name}>{label}</label>
-        <input className=" w-full bg-gray-100 border p-3 h-12 rounded-lg  placeholder:text-slate-500 placeholder:text-sm" {...field} {...props} />
-        {meta.touched && meta.error ? (
-          <div className="error text-red-500 text-xs">{meta.error}</div>
-        ) : null}
-      </div>
-    );
-  };
+  return (
+    <label className={`border rounded-md py-2 px-2 ${radioButtonValue === props.value ? 'bg-gray-100 border-gray-300' : 'border-gray-100'}`}>
+      <input
+        type="radio"
+        {...field} 
+        {...props}
+        checked={radioButtonValue === props.value}
+      />
+      <span className='ml-2'>{label}</span>
+    </label>
+  );
+};
