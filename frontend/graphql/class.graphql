@@ -1,6 +1,6 @@
 query GetClassesQuery {
   getClassesQuery {
-    classId
+    _id
     name
     teachers
     endDate
@@ -11,11 +11,11 @@ query GetClassesQuery {
 
 mutation CreateClassMutation($input: CreateClassInput!) {
   createClassMutation(input: $input) {
-    classId
     name
     teachers
     endDate
     startDate
     type
+    _id
   }
 }
