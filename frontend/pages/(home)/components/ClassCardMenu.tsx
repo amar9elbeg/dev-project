@@ -1,23 +1,47 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction }  from 'react'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-import { Delete, Edit, Ellipsis, MenuIcon } from 'lucide-react'
-  
+import { Delete, Edit, Ellipsis } from 'lucide-react'
+import { Class , useDeleteClassMutationMutation} from "@/generated";
 
-export const ClassCardMenu = () => {
+
+  
+interface ClassCardMenuProps {
+  value: boolean;
+  setValue: Dispatch<SetStateAction<boolean>>;
+  classData: Class;
+  setAdjustData: Dispatch<SetStateAction<Class | undefined>>;
+  refreshClassesData: ()=> void;
+}
+
+
+export const ClassCardMenu = (props: ClassCardMenuProps) => {
+  const {value, setValue , classData, setAdjustData, refreshClassesData} = props
+  const [deleteClassMutation] = useDeleteClassMutationMutation()
+
+  const deleteClassFunction= async ()=>{
+    await deleteClassMutation({variables:{classId: classData?._id}})
+    await refreshClassesData()
+  }
+
+  const openAdjustModal=()=>{
+    setValue(true);
+    setAdjustData(classData)
+  }
+
   return (
     <DropdownMenu>
-    <DropdownMenuTrigger data-testid='menu-icon'> <Ellipsis/></DropdownMenuTrigger>
+    <DropdownMenuTrigger data-testid='menu-icon' className='cursor-pointer'> <Ellipsis/></DropdownMenuTrigger>
     <DropdownMenuContent align='end'>
-        <DropdownMenuItem className='flex justify-start gap-3'>
+        <DropdownMenuItem className='flex justify-start gap-3' onClick={()=>openAdjustModal()}>
             <Edit className='w-4 h-4' data-testid='edit-icon'/>
             <p>Засах</p>
         </DropdownMenuItem>
-        <DropdownMenuItem className='flex justify-start gap-3'>
+        <DropdownMenuItem className='flex justify-start gap-3' onClick={()=>deleteClassFunction()}>
             <Delete className='w-4 h-4' data-testid='delete-icon'/>
             <p>Устгах</p>
         </DropdownMenuItem>

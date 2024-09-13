@@ -14,6 +14,8 @@ export const studentTypeDefs = gql`
         profileImageUrl: String
         classId: ID
         active: Boolean
+        phoneNumber: Number
+        email: String
     }
 
     input CreateStudentInput {
@@ -22,6 +24,8 @@ export const studentTypeDefs = gql`
         studentCode: String!
         profileImageUrl: String!
         classId: ID
+        phoneNumber: Number
+        email: String
     }
 
 

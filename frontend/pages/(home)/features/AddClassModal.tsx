@@ -15,9 +15,10 @@ import { RadioButton } from '@/pages/(common)/components/RadioButton';
 interface AddClassModal {
   value: boolean;
   setValue: Dispatch<SetStateAction<boolean>>;
+  refreshClassesData: ()=> void;
 }
 export const AddClassModal = ({ ...props }: AddClassModal) => {
-  const { value, setValue } = props;
+  const { value, setValue, refreshClassesData } = props;
   const [createClassMutation] = useCreateClassMutationMutation();
 
   const submitFunction = async (values: formikValue) => {
@@ -25,11 +26,7 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
     const promise = createClassMutation({
       variables: {
         input: {
-          name,
-          teachers: [teacherName1, teacherName2],
-          type,
-          startDate,
-          endDate
+          name, teachers: [teacherName1, teacherName2], type, startDate, endDate
         }
       }
     });
@@ -43,6 +40,7 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
     });
     try {
       await promise;
+      await refreshClassesData()
     } catch (err) {
       console.error("Error creating class:", err);
     }
@@ -65,23 +63,14 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
                 return (
                   <Form>
                     <Input
-                      label="Ангиин нэр:"
-                      name="name"
-                      type='text'
-                      placeholder='Ангийн кодыг оруулна уу.'
+                      label="Ангиин нэр:" name="name" type='text' placeholder='Ангийн кодыг оруулна уу.'
                     />
                     <div className='grid grid-cols-2 gap-x-5'>
                       <Input
-                        label="Багш 1-н нэр:"
-                        name="teacherName1"
-                        type='text'
-                        placeholder='Багшийн нэр оруулна уу.'
+                        label="Багш 1-н нэр:" name="teacherName1" type='text' placeholder='Багшийн нэр оруулна уу.'
                       />
                       <Input
-                        label="Багш 2-н нэр:"
-                        name="teacherName2"
-                        type='text'
-                        placeholder='Багшийн нэр оруулна уу.'
+                        label="Багш 2-н нэр:" name="teacherName2" type='text' placeholder='Багшийн нэр оруулна уу.'
                       />
                       <DatePicker label="Эхлэх огноо:" name="startDate" />
                       <DatePicker label="Дуусах огноо:" name="endDate" />

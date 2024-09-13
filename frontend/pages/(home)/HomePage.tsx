@@ -5,19 +5,24 @@ import { ClassTabs } from "./features/ClassTabs";
 import { Header } from "../(common)/components/Header";
 import { Button } from "../(common)/components/Button";
 import { AdjustClassModal } from "./features/AdjustClassModal";
-import { Class, useCreateClassMutationMutation, useGetClassesQueryQuery } from "@/generated";
-import { ToastContainer, toast } from 'react-toastify';
+import { Class, useGetClassesQueryQuery } from "@/generated";
+import { ToastContainer, } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 
 
 export const HomePage = () => {
   const [openAddClassModal, setOpenAddClassModal] = useState(false)
   const [openAdjustClassModal, setOpenAdjustClassModal] = useState(false)
+  const [adjustClassData, setAdjustClassData] = useState<Class>()
+  const [selectedTab, setSelectedTab] = useState('ALL')
 
-  const { data, loading, error } = useGetClassesQueryQuery();
-  console.log(data)
+  const { data, loading, error, refetch } = useGetClassesQueryQuery();
+
+  const filteredClasses = data?.getClassesQuery?.filter((eachClass: Class) => {
+    if (selectedTab === 'ALL') { return true; } else { return eachClass.type === selectedTab; }
+  }) || [];
 
   return (
     <div className="min-h-screen w-full flex justify-center items-start bg-customGray">
@@ -25,17 +30,21 @@ export const HomePage = () => {
         <Header />
         <div className="w-full flex-col justify-center py-10 px-20">
           <div className="w-full flex justify-between">
-            <ClassTabs />
-            <Button text="Анги +" value={openAddClassModal} setValue={setOpenAddClassModal} buttonVariant="outline"/>
+            <ClassTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+            <Button text="Анги +" value={openAddClassModal} setValue={setOpenAddClassModal} buttonVariant="outline" />
           </div>
-          <div className="w-full grid grid-cols-4 my-10">
-            <Classcard className="24h-mp1a" endDate="23.05.11" startDate="24.11.22" teacherName1="elbeg" teacherName2="gerelee" />
+          <div className="w-full grid grid-cols-4 my-10 gap-5">
+            {filteredClasses.map((each: Class) =>
+            (
+              <Classcard classData={each} value={openAdjustClassModal} setValue={setOpenAdjustClassModal} setAdjustData={setAdjustClassData} refreshClassesData={refetch} />
+            )
+            )}
           </div>
         </div>
       </div>
-      <AddClassModal value={openAddClassModal} setValue={setOpenAddClassModal} />
-      <AdjustClassModal value={openAdjustClassModal} setValue={setOpenAdjustClassModal} />
-      <ToastContainer/>
+      <AddClassModal value={openAddClassModal} setValue={setOpenAddClassModal} refreshClassesData={refetch} />
+      <AdjustClassModal value={openAdjustClassModal} setValue={setOpenAdjustClassModal} adjustClassData={adjustClassData} refreshClassesData={refetch} />
+      <ToastContainer />
 
     </div>
   )

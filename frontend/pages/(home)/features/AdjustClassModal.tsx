@@ -1,99 +1,95 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-  DialogClose
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose
 } from "@/components/ui/dialog";
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
 import { Input } from '@/pages/(common)/components/Input';
 import { DatePicker } from '@/pages/(common)/components/DatePicker';
 import { Button } from '@/pages/(common)/components/Button';
-
+import { Class, useEditClassMutationMutation } from "@/generated";
+import { RadioButton } from '@/pages/(common)/components/RadioButton';
+import { classDataValidation, formikValue } from './utils/ClassFormik';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface AdjustClassModal {
   value: boolean;
   setValue: Dispatch<SetStateAction<boolean>>;
+  adjustClassData: Class | undefined;
+  refreshClassesData: () => void;
 }
 
 export const AdjustClassModal = ({ ...props }: AdjustClassModal) => {
-  const { value, setValue } = props;
-  const classDataInitialValue = {
-    className: '',
-    teacherName1: '',
-    teacherName2: '',
-    startDate: '',
-    endDate: '',
-    classType: "coding",
+  const { value, setValue, adjustClassData, refreshClassesData } = props;
+  const [editClassMutation] = useEditClassMutationMutation()
+
+  const adjustClassDataInitialValue = {
+    name: adjustClassData?.name,
+    teacherName1: adjustClassData?.teachers?.[0] ?? '',
+    teacherName2: adjustClassData?.teachers?.[1] ?? '',
+    startDate: adjustClassData?.startDate,
+    endDate: adjustClassData?.endDate,
+    type: adjustClassData?.type,
   }
 
-  const classDataValidation = Yup.object({
-    className: Yup.string().min(2, "Must be 2 characters or more")
-      .max(15, 'Must be 15 characters or less')
-      .required('Required'),
-    teacherName1: Yup.string().min(2, "Must be 2 characters or more")
-      .max(20, 'Must be 20 characters or less')
-      .required('Required'),
-    teacherName2: Yup.string().min(2, "Must be 2 characters or more")
-      .max(20, 'Must be 20 characters or less')
-      .required('Required'),
-    startDate: Yup.string().required('Required'),
-    endDate: Yup.string().required('Required'),
-    classType: Yup.string()
-      .oneOf(['coding', 'design'], 'Invalid class type')
-      .required('Required')
-  });
+  const updateFunction = async (values: formikValue) => {
+    const { name, teacherName1, teacherName2, type, startDate, endDate } = values;
+    const promise = editClassMutation({
+      variables: {
+        classId: adjustClassData?._id,
+        classInput: {
+          name, teachers: [teacherName1, teacherName2], type, startDate, endDate
+        }
+      }
+    });
+    toast.promise(promise, {
+      pending: 'Updating class ' + values.name,
+      success: values.name + ' class updated successfully!',
+      error: 'Error updating class.',
+    }, {
+      autoClose: 2000,
+      position: 'bottom-right'
+    });
+    try {
+      await promise;
+      await refreshClassesData();
+    } catch (err) {
+      console.error("Error updating class:", err);
+    }
+  }
 
   return (
     <div>
       <Dialog open={value} onOpenChange={setValue}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Ангийн мэдээлэл засах</DialogTitle>
+            <DialogTitle>Анги нэмэх</DialogTitle>
           </DialogHeader>
           <div className="gap-10 my-5">
             <Formik
-              initialValues={classDataInitialValue}
+              initialValues={adjustClassDataInitialValue}
               validationSchema={classDataValidation}
-              onSubmit={(values) => { console.log(values); }}
+              onSubmit={(values) => { updateFunction(values) }}
             >
               {({ isValid, values }) => {
                 return (
                   <Form>
                     <Input
-                      label="Ангиин нэр:"
-                      name="className"
-                      type='text'
-                      placeholder='Ангийн кодыг оруулна уу.'
+                      label="Ангиин нэр:" name="name" type='text' placeholder='Ангийн кодыг оруулна уу.'
                     />
                     <div className='grid grid-cols-2 gap-x-5'>
                       <Input
-                        label="Багш 1-н нэр:"
-                        name="teacherName1"
-                        type='text'
-                        placeholder='Багшийн нэр оруулна уу.'
+                        label="Багш 1-н нэр:" name="teacherName1" type='text' placeholder='Багшийн нэр оруулна уу.'
                       />
                       <Input
-                        label="Багш 2-н нэр:"
-                        name="teacherName2"
-                        type='text'
-                        placeholder='Багшийн нэр оруулна уу.'
+                        label="Багш 2-н нэр:" name="teacherName2" type='text' placeholder='Багшийн нэр оруулна уу.'
                       />
                       <DatePicker label="Эхлэх огноо:" name="startDate" />
                       <DatePicker label="Дуусах огноо:" name="endDate" />
                     </div>
                     <div role="group" aria-labelledby="my-radio-group" className='grid grid-cols-2 gap-x-5'>
-                      <label className={`border rounded-md py-2 px-2 ${values.classType == 'coding' ? 'bg-gray-100 border-gray-300' : "border-gray-100"}`}>
-                        <Field type="radio" name="classType" value="coding"  />
-                        <span className='ml-2'>Кодинг анги</span>
-                      </label>
-                      <label className={`border rounded-md py-2 px-2 ${values.classType == 'design' ? 'bg-gray-100 border-gray-300' : "border-gray-100"}`}>
-                        <Field type="radio" name="classType" value="design" />
-                        <span className='ml-2'>Дизайн анги</span>
-                      </label>
+                      <RadioButton label='Кодинг анги' name='type' value='CODING' radioButtonValue={values.type ?? 'CODING'} />
+                      <RadioButton label='Дизайн анги' name='type' value='DESIGN' radioButtonValue={values.type ?? 'CODING'} />
                     </div>
                     <DialogFooter className='mt-5'>
                       <DialogClose asChild>

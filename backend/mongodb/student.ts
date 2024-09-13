@@ -31,6 +31,12 @@ const StudentSchema = new Schema({
     updatedAt: {
         type: Date,
     },
+    phoneNumber: {
+        type: Number,
+    },
+    email: {
+        type: String
+    }
 })
 
 export const StudentModel = mongoose.models.student || mongoose.model('student', StudentSchema);

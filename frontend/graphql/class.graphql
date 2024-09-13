@@ -19,3 +19,41 @@ mutation CreateClassMutation($input: CreateClassInput!) {
     _id
   }
 }
+
+mutation EditClassMutation($classId: ID!, $classInput: CreateClassInput) {
+  editClassMutation(classId: $classId, classInput: $classInput) {
+    _id
+    name
+    teachers
+    endDate
+    startDate
+    type
+  }
+}
+
+mutation DeleteClassMutation($classId: ID!) {
+  deleteClassMutation(classId: $classId)
+}
+
+query GetClassByIdQuery($classId: ID!) {
+  getClassByIdQuery(classId: $classId) {
+    _id
+    name
+    teachers
+    endDate
+    startDate
+    type
+  }
+}
+
+mutation CreateStudentMutation($input: CreateStudentInput!) {
+  createStudentMutation(input: $input) {
+    _id
+    firstName
+    lastName
+    studentCode
+    profileImageUrl
+    classId
+    active
+  }
+}

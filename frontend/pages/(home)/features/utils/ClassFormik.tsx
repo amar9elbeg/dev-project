@@ -8,13 +8,14 @@ export const classDataInitialValue = {
     endDate: '',
     type: "CODING",
   }
+
   export type formikValue = {
-    name: String,
-    teacherName1: String,
-    teacherName2: String,
-    startDate: String
-    endDate: String,
-    type: String
+    name: String | undefined,
+    teacherName1: String | undefined,
+    teacherName2: String | undefined,
+    startDate: String | undefined,
+    endDate: String | undefined,
+    type: String | undefined,
   }
   export const classDataValidation = Yup.object({
     name: Yup.string().min(2, "Must be 2 characters or more")
