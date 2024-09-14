@@ -32,7 +32,7 @@ const StudentSchema = new Schema({
         type: Date,
     },
     phoneNumber: {
-        type: Number,
+        type: String,
     },
     email: {
         type: String

@@ -4,12 +4,10 @@ import {
 } from "@/components/ui/dialog";
 import { Formik, Form } from 'formik';
 import { Input } from '@/pages/(common)/components/Input';
-import { DatePicker } from '@/pages/(common)/components/DatePicker';
 import { Button } from '@/pages/(common)/components/Button';
 import { useCreateStudentMutationMutation } from "@/generated";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { RadioButton } from '@/pages/(common)/components/RadioButton';
 import { studentDataInitialValue, studentDataValidation, studentFormikValue } from './utils/StudentFormik';
 
 interface AddStudentModalProps {
@@ -73,12 +71,14 @@ export const AddStudentModal = ({ ...props }: AddStudentModalProps) => {
                                             />
                                         </div>
                                         <Input
-                                            label="Утасны дугаар:" name="phoneNumber" type='text' placeholder='Сурагчийн кодыг оруулна уу.'
+                                            label="Утасны дугаар:" name="phoneNumber" type='text' placeholder='Сурагчийн утасны дугаарыг оруулна уу.'
                                         />
                                         <Input
-                                            label="Цахим хаяг:" name="email" type='number' placeholder='Сурагчийн кодыг оруулна уу.'
+                                            label="Цахим хаяг:" name="email" type='text' placeholder='Сурагчийн цахим хаягийг оруулна уу.'
                                         />
-
+                                        <Input
+                                            label="Профайл зураг:" name="profileImageUrl" type='file' placeholder='Татах'
+                                        />
 
                                         <DialogFooter className='mt-5'>
                                             <DialogClose asChild>

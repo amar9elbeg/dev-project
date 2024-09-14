@@ -46,14 +46,3 @@ query GetClassByIdQuery($classId: ID!) {
   }
 }
 
-mutation CreateStudentMutation($input: CreateStudentInput!) {
-  createStudentMutation(input: $input) {
-    _id
-    firstName
-    lastName
-    studentCode
-    profileImageUrl
-    classId
-    active
-  }
-}

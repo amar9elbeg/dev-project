@@ -3,6 +3,7 @@ import { gql } from 'graphql-tag'
 
 export const studentTypeDefs = gql`
     scalar Date
+    scalar Upload
 
     #Student
 
@@ -14,7 +15,7 @@ export const studentTypeDefs = gql`
         profileImageUrl: String
         classId: ID
         active: Boolean
-        phoneNumber: Number
+        phoneNumber: String
         email: String
     }
 
@@ -22,9 +23,9 @@ export const studentTypeDefs = gql`
         firstName: String!
         lastName: String!
         studentCode: String!
-        profileImageUrl: String!
+        profileImageUrl: Upload!
         classId: ID
-        phoneNumber: Number
+        phoneNumber: String
         email: String
     }
 

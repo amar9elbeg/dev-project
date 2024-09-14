@@ -16,6 +16,7 @@ import {  getAttendanceByDateQuery } from './queries/get-attendanceByDate'
 import {  editAttendanceMutation } from './mutations/edit-attendance'
 import {  createAttendanceMutation } from './mutations/create-attendance'
 import { getTopicByIdQuery } from './queries/get-topicById'
+// import {createImageUrl} from './mutations/creaye-imageUrl'
 
 
 export const resolvers = {
@@ -38,5 +39,6 @@ export const resolvers = {
         editTopicMutation, 
         deleteTopicMutation, 
         editAttendanceMutation, 
-        createAttendanceMutation}
+        createAttendanceMutation,
+    }
 } as any

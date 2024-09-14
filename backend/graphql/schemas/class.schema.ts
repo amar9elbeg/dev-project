@@ -1,4 +1,3 @@
-import { Class } from './../../generated/graphql';
 import { gql } from 'graphql-tag'
 
 export const classTypeDefs = gql`

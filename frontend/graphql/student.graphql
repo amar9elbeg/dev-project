@@ -1,0 +1,27 @@
+query getStudentsByClassIdQuery($classId: ID!) {
+  getStudentsByClassIdQuery(classId: $classId) {
+    _id
+    firstName
+    lastName
+    studentCode
+    profileImageUrl
+    classId
+    active
+    phoneNumber
+    email
+  }
+}
+
+mutation createStudentMutation($input: CreateStudentInput!) {
+  createStudentMutation(input: $input) {
+    _id
+    firstName
+    lastName
+    studentCode
+    profileImageUrl
+    classId
+    active
+    phoneNumber
+    email
+  }
+}
