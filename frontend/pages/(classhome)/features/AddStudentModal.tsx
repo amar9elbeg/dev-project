@@ -9,6 +9,7 @@ import { useCreateStudentMutationMutation } from "@/generated";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { studentDataInitialValue, studentDataValidation, studentFormikValue } from './utils/StudentFormik';
+import { StudentPicture } from '../components/StudentPicture';
 
 interface AddStudentModalProps {
     value: boolean;
@@ -20,6 +21,8 @@ export const AddStudentModal = ({ ...props }: AddStudentModalProps) => {
     const [createStudentMutation] = useCreateStudentMutationMutation();
 
     const submitFunction = async (values: studentFormikValue) => {
+        console.log('value', values);
+        
         const promise = createStudentMutation({
             variables: {
                 input: {
@@ -79,6 +82,7 @@ export const AddStudentModal = ({ ...props }: AddStudentModalProps) => {
                                         <Input
                                             label="Профайл зураг:" name="profileImageUrl" type='file' placeholder='Татах'
                                         />
+                                        <StudentPicture/>
 
                                         <DialogFooter className='mt-5'>
                                             <DialogClose asChild>
