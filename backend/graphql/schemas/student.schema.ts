@@ -23,10 +23,11 @@ export const studentTypeDefs = gql`
         firstName: String!
         lastName: String!
         studentCode: String!
-        profileImageUrl: Upload!
+        profileImageUrl: String
         classId: ID
         phoneNumber: String
         email: String
+        active: Boolean
     }
 
 

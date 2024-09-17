@@ -15,7 +15,7 @@ const StudentSchema = new Schema({
     }, 
     profileImageUrl: {
         type: String,
-        required: [true, "please insert image "],
+        // required: [true, "please insert image "],
     }, 
     classId: {
         type: Schema.ObjectId,

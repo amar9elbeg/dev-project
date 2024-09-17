@@ -12,13 +12,13 @@ import { useRouter } from 'next/router';
 import { studentDataInitialValue, studentDataValidation, studentFormikValue } from './utils/StudentFormik';
 import { RadioButton } from '@/pages/(common)/components/RadioButton';
 
-interface AddStudentModalProps {
+interface AddTopicModalProps {
     value: boolean;
     setValue: Dispatch<SetStateAction<boolean>>;
-    refreshStudentsData: () => void;
+    refreshTopicsData: () => void;
 }
-export const AddStudentModal = ({ ...props }: AddStudentModalProps) => {
-    const { value, setValue, refreshStudentsData } = props;
+export const AddTopicModal = ({ ...props }: AddTopicModalProps) => {
+    const { value, setValue, refreshTopicsData } = props;
     const router = useRouter();
     const { classId } = router.query;
     const [createStudentMutation] = useCreateStudentMutationMutation();
@@ -42,7 +42,7 @@ export const AddStudentModal = ({ ...props }: AddStudentModalProps) => {
         });
         try {
             await promise;
-            await refreshStudentsData()
+            await refreshTopicsData()
         } catch (err) {
             console.error("Error adding student:", err);
         }

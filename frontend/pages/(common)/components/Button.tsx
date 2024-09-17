@@ -16,7 +16,7 @@ export const Button = ({ text, buttonVariant = "default", value, setValue, disab
     <ShadcnButton 
       variant={buttonVariant} 
       type="submit" 
-      className="text-lg gap-2" 
+      className="text-lg gap-2 capitalize" 
       disabled={disabled}
       onClick={() => {
         if (disabled === false || disabled === undefined) {
