@@ -19,8 +19,7 @@ interface AdjustClassModal {
   refreshClassesData: () => void;
 }
 
-export const AdjustClassModal = ({ ...props }: AdjustClassModal) => {
-  const { value, setValue, adjustClassData, refreshClassesData } = props;
+export const AdjustClassModal = ({ value, setValue, adjustClassData, refreshClassesData }: AdjustClassModal) => {
   const [editClassMutation] = useEditClassMutationMutation()
 
   const adjustClassDataInitialValue = {

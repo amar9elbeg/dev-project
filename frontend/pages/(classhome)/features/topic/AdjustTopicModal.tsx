@@ -5,46 +5,57 @@ import {
 import { Formik, Form } from 'formik';
 import { Input } from '@/pages/(common)/components/Input';
 import { Button } from '@/pages/(common)/components/Button';
-import { useCreateStudentMutationMutation } from "@/generated";
+import { Topic, useEditTopicMutationMutation } from "@/generated";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
-import { studentDataInitialValue, studentDataValidation, studentFormikValue } from './utils/StudentFormik';
 import { RadioButton } from '@/pages/(common)/components/RadioButton';
+import { TextArea } from '@/pages/(common)/components/TextArea';
+import { topicDataValidation, topicFormikValue } from '../utils/TopicFormik';
 
-interface AddStudentModalProps {
+interface AdjustTopicModalProps {
     value: boolean;
     setValue: Dispatch<SetStateAction<boolean>>;
-    refreshStudentsData: () => void;
+    refreshTopicsData: () => void;
+    adjustTopicData: Topic | undefined
 }
-export const AddStudentModal = ({ ...props }: AddStudentModalProps) => {
-    const { value, setValue, refreshStudentsData } = props;
+export const AdjustTopicModal = ({ value, setValue, refreshTopicsData, adjustTopicData }: AdjustTopicModalProps) => {
     const router = useRouter();
     const { classId } = router.query;
-    const [createStudentMutation] = useCreateStudentMutationMutation();
+    const [updateTopicMutation] = useEditTopicMutationMutation();
 
-    const submitFunction = async (values: studentFormikValue) => {
-        const { studentCode, firstName, lastName, phoneNumber, email, active, profileImageUrl } = values
-        const promise = createStudentMutation({
+    const adjustTopicDataInitialValue = {
+        name: adjustTopicData?.name,
+        description: adjustTopicData?.description,
+        defaultFeedbackGood: adjustTopicData?.defaultFeedbackGood,
+        defaultFeedbackMedium: adjustTopicData?.defaultFeedbackMedium,
+        defaultFeedbackNotEnough: adjustTopicData?.defaultFeedbackNotEnough,
+        active: adjustTopicData?.active ? 'active' : 'inactive',
+    }
+
+    const submitFunction = async (values: topicFormikValue) => {
+        const { name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, active } = values
+        const promise = updateTopicMutation({
             variables: {
-                input: {
-                    studentCode, firstName, lastName, phoneNumber, email, "classId": classId, "active": active == 'active' ? true : false, profileImageUrl
+                topicId: adjustTopicData?._id,
+                topicInput: {
+                    name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, "active": active == 'active' ? true : false, "classId": classId
                 }
             }
         });
         toast.promise(promise, {
-            pending: 'Adding student ' + values.firstName,
-            success: values.firstName + ' student added successfully!',
-            error: 'Error adding student.',
+            pending: 'updating topic ' + values.name,
+            success: values.name + ' topic updated successfully!',
+            error: 'Error updating topic.',
         }, {
             autoClose: 2000,
             position: 'bottom-right'
         });
         try {
             await promise;
-            await refreshStudentsData()
+            await refreshTopicsData()
         } catch (err) {
-            console.error("Error adding student:", err);
+            console.error("Error updating topic:", err);
         }
     }
 
@@ -53,38 +64,32 @@ export const AddStudentModal = ({ ...props }: AddStudentModalProps) => {
             <Dialog open={value} onOpenChange={setValue}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Бүртгэл үүсгэх</DialogTitle>
+                        <DialogTitle>Сэдэв үүсгэх:</DialogTitle>
                     </DialogHeader>
                     <div className="gap-10 my-5">
                         <Formik
-                            initialValues={studentDataInitialValue}
-                            validationSchema={studentDataValidation}
+                            initialValues={adjustTopicDataInitialValue}
+                            validationSchema={topicDataValidation}
                             onSubmit={(values) => { submitFunction(values) }}
                         >
                             {({ isValid, values }) => {
                                 return (
                                     <Form>
                                         <Input
-                                            label="Сурагчийн код:" name="studentCode" type='text' placeholder='Сурагчийн кодыг оруулна уу.'
-                                        />
-                                        <div className='grid grid-cols-2 gap-x-5'>
-                                            <Input
-                                                label="Овог:" name="firstName" type='text' placeholder='Last name'
-                                            />
-                                            <Input
-                                                label="Нэр:" name="lastName" type='text' placeholder='First name'
-                                            />
-                                        </div>
-                                        <Input
-                                            label="Утасны дугаар:" name="phoneNumber" type='text' placeholder='Сурагчийн утасны дугаарыг оруулна уу.'
+                                            label="Нэр:" name="name" type='text' placeholder='Хичээлийн нэрийг оруулна уу.'
                                         />
                                         <Input
-                                            label="Цахим хаяг:" name="email" type='text' placeholder='Сурагчийн цахим хаягийг оруулна уу.'
+                                            label="Тайлбар:" name="description" type='text' placeholder='Хичээлийн тайлбарыг оруулна уу.'
                                         />
-                                        {/* <Input
-                                            label="Профайл зураг:" name="profileImageUrl" type='file' placeholder='Татах'
-                                        /> */}
-                                        {/* <StudentPicture/> */}
+                                        <TextArea
+                                            label="Сэтгэгдэл/ Good:" name="defaultFeedbackGood" type='text' placeholder='Хичээлийн тайлбарыг оруулна уу.'
+                                        />
+                                        <TextArea
+                                            label="Сэтгэгдэл/ Medium:" name="defaultFeedbackMedium" type='text' placeholder='Хичээлийн тайлбарыг оруулна уу.'
+                                        />
+                                        <TextArea
+                                            label="Сэтгэгдэл/ Not enough:" name="defaultFeedbackNotEnough" type='text' placeholder='Хичээлийн тайлбарыг оруулна уу.'
+                                        />
                                         <div role="group" aria-labelledby="my-radio-group" className='grid grid-cols-2 gap-x-5'>
                                             <RadioButton label='Идэвхтэй' name='active' value='active' radioButtonValue={values.active} />
                                             <RadioButton label='Идэвхгүй' name='active' value='inactive' radioButtonValue={values.active} />

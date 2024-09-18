@@ -16,6 +16,7 @@ import {  getAttendanceByDateQuery } from './queries/get-attendanceByDate'
 import {  editAttendanceMutation } from './mutations/edit-attendance'
 import {  createAttendanceMutation } from './mutations/create-attendance'
 import { getTopicByIdQuery } from './queries/get-topicById'
+import { getTopicByClassIdQuery } from './queries/get-topicByClassId'
 // import {createImageUrl} from './mutations/creaye-imageUrl'
 
 
@@ -27,7 +28,9 @@ export const resolvers = {
         getStudentsByClassIdQuery, 
         getTopicsQuery, 
         getTopicByIdQuery, 
-        getAttendanceByDateQuery },
+        getAttendanceByDateQuery,
+        getTopicByClassIdQuery
+     },
     Mutation: { 
         createClassMutation , 
         editClassMutation, 

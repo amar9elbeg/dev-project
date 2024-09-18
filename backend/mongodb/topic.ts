@@ -5,17 +5,27 @@ const TopicSchema = new Schema({
         type: String,
         required: [true, "please insert topic name"],
     }, 
-    week: {
-        type: String,
-        required: [true, "please insert week number"],
-    }, 
     description: {
         type: String,
         required: [true, "please insert topic description"],
     }, 
-    defaultFeedbacks: {
-        type: [String],
+    defaultFeedbackGood: {
+        type: String,
     }, 
+    defaultFeedbackMedium: {
+        type: String,
+    }, 
+    defaultFeedbackNotEnough: {
+        type: String,
+    }, 
+    classId: {
+        type: Schema.Types.ObjectId,
+        ref: "class",
+    }, 
+    active: {
+        type: Boolean,
+        default: true
+    },
     createdAt: {
         type: Date,
     },

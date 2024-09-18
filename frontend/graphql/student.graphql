@@ -1,4 +1,4 @@
-query getStudentsByClassIdQuery($classId: ID!) {
+query GetStudentsByClassIdQuery($classId: ID!) {
   getStudentsByClassIdQuery(classId: $classId) {
     _id
     firstName
@@ -24,4 +24,22 @@ mutation createStudentMutation($input: CreateStudentInput!) {
     phoneNumber
     email
   }
+}
+
+mutation EditStudentMutation($studentId: ID!, $studentInput: CreateStudentInput) {
+  editStudentMutation(studentId: $studentId, studentInput: $studentInput) {
+    _id
+    firstName
+    lastName
+    studentCode
+    profileImageUrl
+    classId
+    active
+    phoneNumber
+    email
+  }
+}
+
+mutation DeleteStudentMutation($studentId: ID!) {
+  deleteStudentMutation(studentId: $studentId)
 }

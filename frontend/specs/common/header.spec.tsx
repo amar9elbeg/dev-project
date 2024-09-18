@@ -10,9 +10,7 @@ describe('Header Common Component', () => {
     const logoElement = screen.getByRole('img'); 
     expect(logoElement).toBeInTheDocument();
 
-    const links = screen.getAllByRole('link')
-    // console.log(links);
-    
+    const links = screen.getAllByRole('link')    
     expect(links.length).toBe(2)
   });
 });

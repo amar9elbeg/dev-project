@@ -1,4 +1,4 @@
-import { Student } from './../../generated/graphql';
+
 import { gql } from 'graphql-tag'
 
 export const studentTypeDefs = gql`
@@ -38,7 +38,7 @@ export const studentTypeDefs = gql`
 
     type Mutation {
         createStudentMutation(input: CreateStudentInput!): Student
-        editStudentMutation(studentId: ID!, studentInput: CreateStudentInput): Boolean
+        editStudentMutation(studentId: ID!, studentInput: CreateStudentInput): Student
         deleteStudentMutation(studentId: ID!): Boolean
     }
 `

@@ -11,13 +11,13 @@ export const studentDataInitialValue = {
 }
 
 export type studentFormikValue = {
-    studentCode: String | undefined,
-    firstName: String | undefined,
-    lastName: String | undefined,
-    phoneNumber: String | undefined,
-    email: String | undefined,
-    profileImageUrl: String | undefined,
-    active: String | undefined,
+    studentCode: string | null | undefined;
+    firstName: string | null | undefined;
+    lastName: string | null | undefined;
+    phoneNumber: string | null | undefined;
+    email: string | null | undefined;
+    profileImageUrl: string | null | undefined;
+    active: string;
 }
 export const studentDataValidation = Yup.object({
     studentCode: Yup.string().min(8, "Must be 8 characters")

@@ -3,10 +3,10 @@ import React from 'react';
 
 type SubHeaderProps = {
   header: string;
-  numberEachSection: number;
+  numberOfItemForEachSection: number;
 };
 
-export const SubHeader = ({ header, numberEachSection }: SubHeaderProps) => {
+export const SubHeader = ({ header, numberOfItemForEachSection }: SubHeaderProps) => {
     const headerMap: { [key: string]: string } = {
         student: 'сурагч',
         topic: 'сэдэв',
@@ -19,7 +19,7 @@ export const SubHeader = ({ header, numberEachSection }: SubHeaderProps) => {
       <h1 className="capitalize p-0 font-semibold text-2xl">{monHeader}</h1>
       <div className="flex justify-start items-center text-gray-400 text-xs gap-2">
         {header === 'student' ? <User size={15}/> : <Bookmark size={15}/>}
-        <span>Нийт {monHeader} : {numberEachSection}</span>
+        <span>Нийт {monHeader} : {numberOfItemForEachSection}</span>
       </div>
     </div>
   );

@@ -8,8 +8,6 @@ import { AdjustClassModal } from "./features/AdjustClassModal";
 import { Class, useGetClassesQueryQuery } from "@/generated";
 import { ToastContainer, } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
 
 
 export const HomePage = () => {

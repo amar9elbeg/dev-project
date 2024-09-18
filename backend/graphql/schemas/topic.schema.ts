@@ -1,4 +1,3 @@
-import { Topic } from './../../generated/graphql';
 import { gql } from 'graphql-tag'
 
 export const topicTypeDefs = gql`
@@ -7,34 +6,39 @@ export const topicTypeDefs = gql`
 
     #Topic
 
+    scalar Date
+
     type Topic {
         _id: ID
-        name: String
-        week: String
-        active: Boolean
+        name: String!
         description: String!
-        defaultFeedbacks: [String]
+        defaultFeedbackGood: String
+        defaultFeedbackMedium: String
+        defaultFeedbackNotEnough: String
+        classId: ID
+        active: Boolean
     }
-
 
     input CreateTopicInput {
         name: String!
-        week: String!
-        active: Boolean!
-        description: String!
+        description: String
+        defaultFeedbackGood: String
+        defaultFeedbackMedium: String
+        defaultFeedbackNotEnough: String
+        classId: ID
+        active: Boolean
     }
-
-  
 
     type Query {
         getTopicsQuery: [Topic]
-        getTopicByIdQuery (topicId: ID!): Topic
+        getTopicByIdQuery(topicId: ID!): Topic
+        getTopicByClassIdQuery(classId: ID!): [Topic]
     }
 
     type Mutation {
         createTopicMutation(input: CreateTopicInput!): Topic
         editTopicMutation(topicId: ID!, topicInput: CreateTopicInput): Topic
         deleteTopicMutation(topicId: ID!): Boolean
-
     }
+
 `

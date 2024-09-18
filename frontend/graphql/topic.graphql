@@ -1,0 +1,71 @@
+mutation CreateTopicMutation($input: CreateTopicInput!) {
+  createTopicMutation(input: $input) {
+    _id
+    name
+    description
+    defaultFeedbackGood
+    defaultFeedbackMedium
+    defaultFeedbackNotEnough
+    classId
+    active
+  }
+}
+
+query GetTopicByIdQuery($topicId: ID!) {
+  getTopicByIdQuery(topicId: $topicId) {
+    _id
+    name
+    description
+    defaultFeedbackGood
+    defaultFeedbackMedium
+    defaultFeedbackNotEnough
+    classId
+    active
+  }
+}
+
+query GetTopicsQuery {
+  getTopicsQuery {
+    _id
+    name
+    description
+    defaultFeedbackGood
+    defaultFeedbackMedium
+    defaultFeedbackNotEnough
+    classId
+    active
+  }
+}
+
+query GetTopicByClassIdQuery($classId: ID!) {
+  getTopicByClassIdQuery(classId: $classId) {
+    _id
+    name
+    description
+    defaultFeedbackGood
+    defaultFeedbackMedium
+    defaultFeedbackNotEnough
+    classId
+    active
+  }
+}
+
+mutation DeleteTopicMutation($topicId: ID!) {
+  deleteTopicMutation(topicId: $topicId)
+}
+
+mutation EditTopicMutation($topicId: ID!, $topicInput: CreateTopicInput) {
+  editTopicMutation(topicId: $topicId, topicInput: $topicInput) {
+    _id
+    name
+    description
+    defaultFeedbackGood
+    defaultFeedbackMedium
+    defaultFeedbackNotEnough
+    classId
+    active
+  }
+}
+
+
+

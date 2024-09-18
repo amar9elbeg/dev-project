@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Classcard } from '../../pages/(home)/components/Classcard';
-import { ClassCardMenu } from '../../pages/(home)/components/ClassCardMenu'; // Update with the correct path
 
 describe('Classcard Component', () => {
   const defaultProps = {
@@ -12,9 +11,10 @@ describe('Classcard Component', () => {
     teacherName1: 'John Doe',
     teacherName2: 'Jane Smith',
   };
+  const defaultFunction =()=>{}
 
   it('renders correctly with given props', () => {
-    render(<Classcard {...defaultProps} />);
+    render(<Classcard classData={defaultProps} value={false} setValue={defaultFunction} refreshClassesData={defaultFunction} setAdjustData={defaultFunction}/>);
 
     const classNameElement = screen.getByText(defaultProps.className);
     expect(classNameElement).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('Classcard Component', () => {
   });
 
   it('renders ClassCardMenu in the CardTitle', () => {
-    render(<Classcard {...defaultProps} />);
+    render(<Classcard classData={defaultProps} value={false} setValue={defaultFunction} refreshClassesData={defaultFunction} setAdjustData={defaultFunction}/>);
 
     const classCardMenuElement = screen.getByRole('button'); 
     expect(classCardMenuElement).toBeInTheDocument();
