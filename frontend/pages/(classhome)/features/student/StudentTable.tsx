@@ -22,18 +22,18 @@ export const StudentTable = ({ data, value, setValue, setAdjustStudentData, refr
   console.log('student data', data);
 
   return (
-    <>
-      <Table>
+    <div className='rounded-lg border-gray-300 border'>
+      <Table className='bg-white rounded-lg'>
         <TableHeader>
           <TableRow>
             <TableHead className=' max-w-16'>ID</TableHead>
             <TableHead className=' max-w-16'>Зураг</TableHead>
             <TableHead className=' max-w-20'>Нэр</TableHead>
             <TableHead className=' max-w-20'>Овог</TableHead>
-            <TableHead className=' max-w-40'>Цахим хаяг</TableHead>
+            <TableHead className=' max-w-20'>Цахим хаяг</TableHead>
             <TableHead className=' max-w-20'>Утасны дугаар</TableHead>
             <TableHead className=' max-w-20'>Төлөв</TableHead>
-            <TableHead className=' max-w-4'>Засах</TableHead>
+            <TableHead className=' w-10'>Засах</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -66,11 +66,11 @@ export const StudentTable = ({ data, value, setValue, setAdjustStudentData, refr
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={8}>No results found</TableCell>
+              <TableCell colSpan={8} className='italic' >No results found</TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };

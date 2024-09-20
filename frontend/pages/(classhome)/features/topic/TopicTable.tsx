@@ -22,15 +22,15 @@ export const TopicTable = ({ data, value, setValue, setAdjustTopicData, refreshT
   console.log('topic data', data);
 
   return (
-    <>
-      <Table>
+    <div className='rounded-lg border-gray-300 border'>
+      <Table className='bg-white rounded-lg'>
         <TableHeader>
           <TableRow>
             <TableHead className=' max-w-16'>Гарчиг</TableHead>
             <TableHead className=' max-w-24'>Тайлбар</TableHead>
-            <TableHead className=' max-w-32'>Сэтгэгдэл</TableHead>
-            <TableHead className=' max-w-32'>Төлөв</TableHead>
-            <TableHead className=' max-w-4'>Засах</TableHead>
+            <TableHead className=' max-w-24'>Сэтгэгдэл</TableHead>
+            <TableHead className=' max-w-10'>Төлөв</TableHead>
+            <TableHead className=' w-10'>Засах</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -59,11 +59,11 @@ export const TopicTable = ({ data, value, setValue, setAdjustTopicData, refreshT
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={4}>No results found</TableCell>
+              <TableCell colSpan={4} className='italic text-gray-500'>No results found</TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };

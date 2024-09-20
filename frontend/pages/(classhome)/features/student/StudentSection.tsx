@@ -5,6 +5,7 @@ import { Student } from '@/generated'
 import { HeaderMap } from '../utils/Utils'
 import { Button } from '@/pages/(common)/components/Button'
 import { AdjustStudentModal } from './AdjustStudentModal'
+import { Search } from 'lucide-react'
 
 type StudentSectionProps = {
     selectedTab: string,
@@ -37,7 +38,10 @@ export const StudentSection = ({ selectedTab, studentsDataByClassId, refreshStud
     return (
     <div className='flex flex-col w-full'>
         <div className='flex justify-between my-8'>
-            <input type='text' className='p-2 border-gray-400 placeholder:italic rounded-sm' placeholder='Search' onChange={(e)=>setSearch(e.target.value)} />
+          <div className='flex border-gray-300 border rounded-lg'>
+            <div className='flex justify-center items-center text-gray-500 rounded-l-lg px-2 bg-gray-200'><Search size={15}/></div>
+            <input type='text' className='p-2  placeholder:italic rounded-r-lg' placeholder={` Search student`} onChange={(e)=>setSearch(e.target.value)} />
+          </div>
             <Button text={`${monHeader} +`} value={openAddStudentModal} setValue={setOpenAddStudentModal} />
             </div>
         <StudentTable data={filteredStudentData} value={openAdjustStudentModal} setValue={setOpenAdjustStudentModal} refreshStudentsData={refreshStudentsData} setAdjustStudentData={setAdjustStudentData}/>

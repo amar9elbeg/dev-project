@@ -17,8 +17,6 @@ interface ClassCardProps {
     setValue: Dispatch<SetStateAction<boolean>>;
     setAdjustData: Dispatch<SetStateAction<Class | undefined>>;
     refreshClassesData: ()=> void;
-
-
 }
 
 export const Classcard = (props: ClassCardProps) => {
@@ -46,7 +44,7 @@ export const Classcard = (props: ClassCardProps) => {
                 <CardHeader>
                     <CardTitle className='w-full uppercase flex justify-between'>
                         <p>{classData.name}</p>
-                        <ClassCardMenu value={value} setValue={setValue} classData={classData} setAdjustData={setAdjustData} refreshClassesData={refreshClassesData}/>
+                        <ClassCardMenu data-testid='class-card-menu' value={value} setValue={setValue} classData={classData} setAdjustData={setAdjustData} refreshClassesData={refreshClassesData}/>
                     </CardTitle>
                     <CardDescription>{`${startDateFormatted} - ${endDateFormatted} `}</CardDescription>
                 </CardHeader>

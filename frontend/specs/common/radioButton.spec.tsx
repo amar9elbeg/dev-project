@@ -3,6 +3,8 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { RadioButton } from '../../pages/(common)/components/RadioButton';
 import { Formik, Form } from 'formik';
+import userEvent from '@testing-library/user-event';
+
 
 
 const setup = (name: string, label: string, value: string, radioButtonValue: string) => render(
@@ -21,10 +23,28 @@ const setup = (name: string, label: string, value: string, radioButtonValue: str
 describe('radio button Common Component', () => {
   it('renders the components and icons', () => {
     setup('name','testLabel', 'active', 'inactive' )
-    const label = screen.getByText('inputLabel');
-
+    const label = screen.getByText('testLabel');
     expect(label).toBeInTheDocument();
 
+    const radioButton = screen.getByRole('radio');
+    expect(radioButton).toBeInTheDocument();    
+    expect(radioButton).not.toBeChecked();
 
+  });
+  it('checks the radio button when value matches radioButtonValue', () => {
+    setup('status', 'Active', 'active', 'active'); 
+    
+    const radioButton = screen.getByRole('radio');
+    expect(radioButton).toBeChecked();
+  });
+
+  it('changes radio button value on user interaction', async () => {
+    setup('status', 'Active', 'active', 'inactive');
+    
+    const radioButton = screen.getByRole('radio');
+    expect(radioButton).not.toBeChecked();
+
+    await userEvent.click(radioButton);
+    expect(radioButton).toBeChecked();
   });
 });

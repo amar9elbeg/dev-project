@@ -13,21 +13,22 @@
 //   };
 //   const defaultFunction =()=>{}
 
-//   it('renders the Ellipsis icon in the DropdownMenuTrigger', () => {
-//     render(<ClassCardMenu value={false} setValue={defaultFunction} setAdjustData={defaultFunction} refreshClassesData={defaultFunction} classData={defaultProps}/>);
 
-//     const triggerIcon = screen.getByRole('button');
-//     expect(triggerIcon).toBeInTheDocument();
-//     expect(triggerIcon).toHaveAttribute('aria-expanded', 'false'); 
-//   });
+// //   it('renders the Ellipsis icon in the DropdownMenuTrigger', () => {
+// //     render(<ClassCardMenu value={false} setValue={defaultFunction} setAdjustData={defaultFunction} refreshClassesData={defaultFunction} classData={defaultProps}/>);
+
+// //     const triggerIcon = screen.getByRole('button');
+// //     expect(triggerIcon).toBeInTheDocument();
+// //     expect(triggerIcon).toHaveAttribute('aria-expanded', 'false'); 
+// //   });
 
 //   it('displays dropdown menu items when the trigger is clicked', () => {
 //     render(<ClassCardMenu value={false} setValue={defaultFunction} setAdjustData={defaultFunction} refreshClassesData={defaultFunction} classData={defaultProps}/>);
 
 //     const trigger = screen.getByTestId('menu-icon');    
     
-//     fireEvent.click(trigger);
-//     expect(defaultFunction).toHaveBeenCalledWith(true); 
+//     fireEvent.pointerDown(trigger);
+//     // expect(defaultFunction).toHaveBeenCalledWith(true); 
 
 
 //     // const editItem = screen.getByText('Засах');

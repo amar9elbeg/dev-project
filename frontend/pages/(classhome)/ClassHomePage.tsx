@@ -8,6 +8,7 @@ import { SubHeader } from './components/SubHeader';
 import { HeaderMap } from './features/utils/Utils';
 import { StudentSection } from './features/student/StudentSection';
 import { TopicSection } from './features/topic/TopicSection';
+import { ReportSection } from './features/report/ReportSection';
 
 export const ClassHomePage = ({ classId }: { classId: string | string[] | undefined }) => {
     const classCode = classId
@@ -27,7 +28,7 @@ export const ClassHomePage = ({ classId }: { classId: string | string[] | undefi
         variables: { classId: classCode }
     });
     console.log("/topic raw", topicsDataResponse);
-    
+
     const topicsDataByClassId: Topic[] = topicsDataResponse?.getTopicByClassIdQuery
     console.log("/topic ", topicsDataByClassId)
 
@@ -64,7 +65,11 @@ export const ClassHomePage = ({ classId }: { classId: string | string[] | undefi
                 topicsLoading={topicsLoading}
                 topicsError={topicsError} />)
         } else {
-            return 1
+            return (<ReportSection selectedTab={selectedTab}
+                reportsDataByClassId={studentsDataByClassId}
+                refreshReportsData={refetchTopicsData}
+                reportsLoading={topicsLoading}
+                reportsError={topicsError} />)
         }
     }
 
