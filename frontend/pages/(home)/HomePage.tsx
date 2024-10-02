@@ -19,7 +19,8 @@ export const HomePage = () => {
   const { data, loading, error, refetch } = useGetClassesQueryQuery();
 
   const filteredClasses = data?.getClassesQuery?.filter((eachClass: Class) => {
-    if (selectedTab === 'ALL') { return true; } else { return eachClass.type === selectedTab; }
+    if (selectedTab === 'ALL') { return true; }
+    else { return eachClass.type === selectedTab; }
   }) || [];
 
   return (
@@ -29,7 +30,7 @@ export const HomePage = () => {
         <div className="w-full flex-col justify-center py-10 px-20">
           <div className="w-full flex justify-between">
             <ClassTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-            <Button text="Анги +" value={openAddClassModal} setValue={setOpenAddClassModal} buttonVariant="outline" />
+            <Button text="Анги +" value={openAddClassModal} dataCy='HomePage-Add-Class-Button' setValue={setOpenAddClassModal} buttonVariant="outline" />
           </div>
           <div className="w-full grid grid-cols-4 my-10 gap-5">
             {filteredClasses.map((each: Class) =>

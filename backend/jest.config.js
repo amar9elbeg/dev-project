@@ -26,6 +26,7 @@ const config = {
     '!**/.next/**',
     '!**/out/**',
     '!**/*.d.ts',
+    '!**/graphql/resolvers/index.ts',
   ],
   testMatch: ['<rootDir>/specs/**/*.(test|spec).{js,jsx,ts,tsx}'],
   coverageDirectory: '<rootDir>/coverage',

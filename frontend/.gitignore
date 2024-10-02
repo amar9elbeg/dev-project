@@ -38,3 +38,10 @@ next-env.d.ts
 
 # codegen
 /generated
+.nyc_output
+.swc
+cypress/results
+cypress/downloads
+mochawesome-report
+mochawesome.json
+cypress/screenshots

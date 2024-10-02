@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 
 export const getTopicByClassIdQuery = async (_: any, { classId }: any) => {
-    console.log('classid topic', classId);
+    // console.log('classid topic', classId);
     // const objectId = new mongoose.Types.ObjectId(classId);
     // const topics = await TopicModel.find({ classId: objectId });
     const topics = await TopicModel.find({classId})

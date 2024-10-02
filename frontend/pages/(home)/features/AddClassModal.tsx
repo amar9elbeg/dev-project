@@ -15,7 +15,7 @@ import { RadioButton } from '@/pages/(common)/components/RadioButton';
 interface AddClassModal {
   value: boolean;
   setValue: Dispatch<SetStateAction<boolean>>;
-  refreshClassesData: ()=> void;
+  refreshClassesData: () => void;
 }
 export const AddClassModal = ({ ...props }: AddClassModal) => {
   const { value, setValue, refreshClassesData } = props;
@@ -47,9 +47,9 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
   }
 
   return (
-    <div>
-      <Dialog open={value} onOpenChange={setValue}>
-        <DialogContent>
+    <div >
+      <Dialog open={value} onOpenChange={setValue} >
+        <DialogContent data-cy='Add-Class-Modal'>
           <DialogHeader>
             <DialogTitle>Анги нэмэх</DialogTitle>
           </DialogHeader>
