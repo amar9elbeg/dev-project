@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ClassHomePage } from "../(classhome)/ClassHomePage";
+import { ClassHomePage } from "../classhome/ClassHomePage";
 
 
 

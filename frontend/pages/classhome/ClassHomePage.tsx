@@ -36,7 +36,7 @@ export const ClassHomePage = ({ classId }: { classId: string | string[] | undefi
 
 
     const [selectedTab, setSelectedTab] = useState('student')
-    const monHeader = HeaderMap[selectedTab] || 'сурагч';
+    const monHeader = HeaderMap[selectedTab];
 
     const numberOfItemForEachSection = () => {
         if (selectedTab == 'student') {

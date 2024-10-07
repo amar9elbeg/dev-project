@@ -6,8 +6,8 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { ClassCardMenu } from './ClassCardMenu';
-import { Class} from "@/generated";
+import { ClassCardMenu } from '../features/ClassCardMenu';
+import { Class } from "@/generated";
 import Link from 'next/link';
 
 
@@ -16,7 +16,7 @@ interface ClassCardProps {
     value: boolean;
     setValue: Dispatch<SetStateAction<boolean>>;
     setAdjustData: Dispatch<SetStateAction<Class | undefined>>;
-    refreshClassesData: ()=> void;
+    refreshClassesData: () => void;
 }
 
 export const Classcard = (props: ClassCardProps) => {
@@ -38,23 +38,25 @@ export const Classcard = (props: ClassCardProps) => {
 
 
     return (
-        <Link href={`/classhome/${classData?._id}`}>
-        <div className='cursor-auto'>
-            <Card className='w-full'>
-                <CardHeader>
-                    <CardTitle className='w-full uppercase flex justify-between'>
-                        <p>{classData.name}</p>
-                        <ClassCardMenu data-testid='class-card-menu' value={value} setValue={setValue} classData={classData} setAdjustData={setAdjustData} refreshClassesData={refreshClassesData}/>
-                    </CardTitle>
-                    <CardDescription>{`${startDateFormatted} - ${endDateFormatted} `}</CardDescription>
-                </CardHeader>
-                <CardContent className='flex gap-4'>
-                    <p className='capitalize bg-gray-200 p-2 text-sm rounded-sm'>{classData.teachers?.[0] ?? 'Unknown'}</p>
-                    <p className='capitalize bg-gray-200 p-2 text-sm rounded-sm'>{classData.teachers?.[1] ?? 'Unknown'}</p>
-                </CardContent>
-            </Card>
-        </div>
-        </Link>
+        // <Link href={`/classhome/${classData?._id}`}>
+            <div className='cursor-auto'>
+                <Card className='w-full'>
+                    <CardHeader>
+                        <CardTitle className='w-full uppercase flex justify-between'>
+                            <Link href={`/classhome/${classData?._id}`}>
+                                <p className='cursor-pointer' data-cy='HomePage-ClassCard-Header'>{classData.name}</p>
+                            </Link>
+                            <ClassCardMenu data-testid='class-card-menu' value={value} setValue={setValue} classData={classData} setAdjustData={setAdjustData} refreshClassesData={refreshClassesData} />
+                        </CardTitle>
+                        <CardDescription>{`${startDateFormatted} - ${endDateFormatted} `}</CardDescription>
+                    </CardHeader>
+                    <CardContent className='flex gap-4'>
+                        <p className='capitalize bg-gray-200 p-2 text-sm rounded-sm'>{classData.teachers?.[0] ?? 'Unknown'}</p>
+                        <p className='capitalize bg-gray-200 p-2 text-sm rounded-sm'>{classData.teachers?.[1] ?? 'Unknown'}</p>
+                    </CardContent>
+                </Card>
+            </div>
+        // </Link>
     )
 }
 

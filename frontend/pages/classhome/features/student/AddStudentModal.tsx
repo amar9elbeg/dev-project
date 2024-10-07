@@ -5,84 +5,82 @@ import {
 import { Formik, Form } from 'formik';
 import { Input } from '@/pages/(common)/components/Input';
 import { Button } from '@/pages/(common)/components/Button';
-import { useCreateTopicMutationMutation } from "@/generated";
+import { useCreateStudentMutationMutation } from "@/generated";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
+import { studentDataInitialValue, studentDataValidation, studentFormikValue } from '../utils/StudentFormik';
 import { RadioButton } from '@/pages/(common)/components/RadioButton';
-import { TextArea } from '@/pages/(common)/components/TextArea';
-import { topicDataInitialValue, topicDataValidation, topicFormikValue } from '../utils/TopicFormik';
 
-interface AddTopicModalProps {
+interface AddStudentModalProps {
     value: boolean;
     setValue: Dispatch<SetStateAction<boolean>>;
-    refreshTopicsData: () => void;
+    refreshStudentsData: () => void;
 }
-export const AddTopicModal = ({ value, setValue, refreshTopicsData }: AddTopicModalProps) => {
+export const AddStudentModal = ({ value, setValue, refreshStudentsData}: AddStudentModalProps) => {
     const router = useRouter();
     const { classId } = router.query;
-    const [createTopicMutation] = useCreateTopicMutationMutation();
+    const [createStudentMutation] = useCreateStudentMutationMutation();
 
-    const submitFunction = async (values: topicFormikValue) => {
-        const {name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, active  } = values
-        const promise = createTopicMutation({
+    const submitFunction = async (values: studentFormikValue) => {
+        const { studentCode, firstName, lastName, phoneNumber, email, active, profileImageUrl } = values
+        const promise = createStudentMutation({
             variables: {
-                input: { 
-                    name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, "active": active == 'active' ? true : false, "classId": classId 
+                input: {
+                    studentCode, firstName, lastName, phoneNumber, email, "classId": classId, "active": active == 'active' ? true : false, profileImageUrl
                 }
             }
         });
-        console.log('topic data', { 
-            name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, "active": active == 'active' ? true : false, "classId": classId 
-        } );
-        
         toast.promise(promise, {
-            pending: 'Adding topic ' + values.name,
-            success: values.name + ' topic added successfully!',
-            error: 'Error adding topic.',
+            pending: 'Adding student ' + values.firstName,
+            success: values.firstName + ' student added successfully!',
+            error: 'Error adding student.',
         }, {
             autoClose: 2000,
             position: 'bottom-right'
         });
-        try {
+
             await promise;
-            await refreshTopicsData()
-        } catch (err) {
-            console.error("Error adding topic:", err);
-        }
+            await refreshStudentsData()
     }
 
     return (
         <div>
             <Dialog open={value} onOpenChange={setValue}>
-                <DialogContent>
+                <DialogContent data-cy='Add-Student-Modal'>
                     <DialogHeader>
-                        <DialogTitle>Сэдэв үүсгэх:</DialogTitle>
+                        <DialogTitle>Бүртгэл үүсгэх</DialogTitle>
                     </DialogHeader>
                     <div className="gap-10 my-5">
                         <Formik
-                            initialValues={topicDataInitialValue}
-                            validationSchema={topicDataValidation}
+                            initialValues={studentDataInitialValue}
+                            validationSchema={studentDataValidation}
                             onSubmit={(values) => { submitFunction(values) }}
                         >
                             {({ isValid, values }) => {
                                 return (
                                     <Form>
                                         <Input
-                                            label="Нэр:" name="name" type='text' placeholder='Хичээлийн нэрийг оруулна уу.'
+                                            label="Сурагчийн код:" name="studentCode" type='text' placeholder='Сурагчийн кодыг оруулна уу.'
+                                        />
+                                        <div className='grid grid-cols-2 gap-x-5'>
+                                            <Input
+                                                label="Овог:" name="firstName" type='text' placeholder='Last name'
+                                            />
+                                            <Input
+                                                label="Нэр:" name="lastName" type='text' placeholder='First name'
+                                            />
+                                        </div>
+                                        <Input
+                                            label="Утасны дугаар:" name="phoneNumber" type='text' placeholder='Сурагчийн утасны дугаарыг оруулна уу.'
                                         />
                                         <Input
-                                            label="Тайлбар:" name="description" type='text' placeholder='Хичээлийн тайлбарыг оруулна уу.'
+                                            label="Цахим хаяг:" name="email" type='text' placeholder='Сурагчийн цахим хаягийг оруулна уу.'
                                         />
-                                        <TextArea
-                                            label="Сэтгэгдэл/ Good:" name="defaultFeedbackGood" type='text' placeholder='Хичээлийн тайлбарыг оруулна уу.'
-                                        />
-                                        <TextArea
-                                            label="Сэтгэгдэл/ Medium:" name="defaultFeedbackMedium" type='text' placeholder='Хичээлийн тайлбарыг оруулна уу.'
-                                        />
-                                        <TextArea
-                                            label="Сэтгэгдэл/ Not enough:" name="defaultFeedbackNotEnough" type='text' placeholder='Хичээлийн тайлбарыг оруулна уу.'
-                                        />
+                                        {/* <Input
+                                            label="Профайл зураг:" name="profileImageUrl" type='file' placeholder='Татах'
+                                        /> */}
+                                        {/* <StudentPicture/> */}
                                         <div role="group" aria-labelledby="my-radio-group" className='grid grid-cols-2 gap-x-5'>
                                             <RadioButton label='Идэвхтэй' name='active' value='active' radioButtonValue={values.active} />
                                             <RadioButton label='Идэвхгүй' name='active' value='inactive' radioButtonValue={values.active} />
@@ -94,6 +92,7 @@ export const AddTopicModal = ({ value, setValue, refreshTopicsData }: AddTopicMo
                                                     value={value}
                                                     setValue={setValue}
                                                     disabled={!isValid}
+                                                    dataCy='ClassHomePage-AddStudent-Save-Button'
                                                 />
                                             </DialogClose>
                                         </DialogFooter>

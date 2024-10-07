@@ -38,12 +38,8 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
       autoClose: 2000,
       position: 'bottom-right'
     });
-    try {
       await promise;
-      await refreshClassesData()
-    } catch (err) {
-      console.error("Error creating class:", err);
-    }
+      await refreshClassesData();
   }
 
   return (
@@ -73,7 +69,7 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
                         label="Багш 2-н нэр:" name="teacherName2" type='text' placeholder='Багшийн нэр оруулна уу.'
                       />
                       <DatePicker label="Эхлэх огноо:" name="startDate" />
-                      <DatePicker label="Дуусах огноо:" name="endDate" />
+                      <DatePicker label="Дуусах огноо:" name="endDate"/>
                     </div>
                     <div role="group" aria-labelledby="my-radio-group" className='grid grid-cols-2 gap-x-5'>
                       <RadioButton label='Кодинг анги' name='type' value='CODING' radioButtonValue={values.type} />
@@ -86,6 +82,7 @@ export const AddClassModal = ({ ...props }: AddClassModal) => {
                           value={value}
                           setValue={setValue}
                           disabled={!isValid}
+                          dataCy='HomePage-AddClassModal-Submit-Button'
                         />
                       </DialogClose>
                     </DialogFooter>

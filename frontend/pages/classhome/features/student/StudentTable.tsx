@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Student } from '@/generated';
-import { StudentDropDownMenu } from '../../components/StudentDropDownMenu';
+import { StudentDropDownMenu } from './StudentDropDownMenu';
 
 type StudentTableProps = {
   data: Student[]; 

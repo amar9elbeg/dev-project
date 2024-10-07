@@ -5,70 +5,56 @@ import {
 import { Formik, Form } from 'formik';
 import { Input } from '@/pages/(common)/components/Input';
 import { Button } from '@/pages/(common)/components/Button';
-import { Topic, useEditTopicMutationMutation } from "@/generated";
+import { useCreateTopicMutationMutation } from "@/generated";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import { RadioButton } from '@/pages/(common)/components/RadioButton';
 import { TextArea } from '@/pages/(common)/components/TextArea';
-import { topicDataValidation, topicFormikValue } from '../utils/TopicFormik';
+import { topicDataInitialValue, topicDataValidation, topicFormikValue } from '../utils/TopicFormik';
 
-interface AdjustTopicModalProps {
+interface AddTopicModalProps {
     value: boolean;
     setValue: Dispatch<SetStateAction<boolean>>;
     refreshTopicsData: () => void;
-    adjustTopicData: Topic | undefined
 }
-export const AdjustTopicModal = ({ value, setValue, refreshTopicsData, adjustTopicData }: AdjustTopicModalProps) => {
+export const AddTopicModal = ({ value, setValue, refreshTopicsData }: AddTopicModalProps) => {
     const router = useRouter();
     const { classId } = router.query;
-    const [updateTopicMutation] = useEditTopicMutationMutation();
-
-    const adjustTopicDataInitialValue = {
-        name: adjustTopicData?.name,
-        description: adjustTopicData?.description,
-        defaultFeedbackGood: adjustTopicData?.defaultFeedbackGood,
-        defaultFeedbackMedium: adjustTopicData?.defaultFeedbackMedium,
-        defaultFeedbackNotEnough: adjustTopicData?.defaultFeedbackNotEnough,
-        active: adjustTopicData?.active ? 'active' : 'inactive',
-    }
+    const [createTopicMutation] = useCreateTopicMutationMutation();
 
     const submitFunction = async (values: topicFormikValue) => {
-        const { name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, active } = values
-        const promise = updateTopicMutation({
+        const {name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, active  } = values
+        const promise = createTopicMutation({
             variables: {
-                topicId: adjustTopicData?._id,
-                topicInput: {
-                    name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, "active": active == 'active' ? true : false, "classId": classId
+                input: { 
+                    name, description, defaultFeedbackGood, defaultFeedbackMedium, defaultFeedbackNotEnough, "active": active == 'active' ? true : false, "classId": classId 
                 }
             }
         });
+        
         toast.promise(promise, {
-            pending: 'updating topic ' + values.name,
-            success: values.name + ' topic updated successfully!',
-            error: 'Error updating topic.',
+            pending: 'Adding topic ' + values.name,
+            success: values.name + ' topic added successfully!',
+            error: 'Error adding topic.',
         }, {
             autoClose: 2000,
             position: 'bottom-right'
         });
-        try {
             await promise;
             await refreshTopicsData()
-        } catch (err) {
-            console.error("Error updating topic:", err);
-        }
     }
 
     return (
         <div>
             <Dialog open={value} onOpenChange={setValue}>
-                <DialogContent>
+                <DialogContent data-cy='Add-Topic-Modal'>
                     <DialogHeader>
                         <DialogTitle>Сэдэв үүсгэх:</DialogTitle>
                     </DialogHeader>
                     <div className="gap-10 my-5">
                         <Formik
-                            initialValues={adjustTopicDataInitialValue}
+                            initialValues={topicDataInitialValue}
                             validationSchema={topicDataValidation}
                             onSubmit={(values) => { submitFunction(values) }}
                         >
@@ -101,6 +87,7 @@ export const AdjustTopicModal = ({ value, setValue, refreshTopicsData, adjustTop
                                                     value={value}
                                                     setValue={setValue}
                                                     disabled={!isValid}
+                                                    dataCy='ClassHomePage-AddTopic-Save-Button'
                                                 />
                                             </DialogClose>
                                         </DialogFooter>

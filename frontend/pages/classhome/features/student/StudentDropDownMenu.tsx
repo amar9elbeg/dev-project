@@ -34,9 +34,9 @@ export const StudentDropDownMenu = ({value, setValue , data, setAdjustStudentDat
 
   return (
     <DropdownMenu>
-    <DropdownMenuTrigger data-testid='menu-icon' className='cursor-pointer'> <Ellipsis/></DropdownMenuTrigger>
-    <DropdownMenuContent align='end'>
-        <DropdownMenuItem className='flex justify-start gap-3' onClick={()=>openAdjustModal()}>
+    <DropdownMenuTrigger data-testid='menu-icon' className='cursor-pointer' data-cy='ClassHomePage-StudentTable-DropDownMenu-Menu-Button'> <Ellipsis/></DropdownMenuTrigger>
+    <DropdownMenuContent align='end' data-cy='ClassHomePage-StudentTable-DropDownMenu-Menu-Content'>
+        <DropdownMenuItem className='flex justify-start gap-3' onClick={()=>openAdjustModal()} data-cy='ClassHomePage-StudentTable-DropDownMenu-Edit-Button'>
             <Edit className='w-4 h-4' data-testid='edit-icon'/>
             <p>Засах</p>
         </DropdownMenuItem>

@@ -51,18 +51,14 @@ export const AdjustStudentModal = ({ value, setValue, refreshStudentsData, adjus
             autoClose: 2000,
             position: 'bottom-right'
         });
-        try {
             await promise;
             await refreshStudentsData()
-        } catch (err) {
-            console.error("Error addupdatinging student:", err);
-        }
     }
 
     return (
         <div>
             <Dialog open={value} onOpenChange={setValue}>
-                <DialogContent>
+                <DialogContent data-cy='ClassHomePage-AdjustStudent-Modal'>
                     <DialogHeader>
                         <DialogTitle>Бүртгэл үүсгэх</DialogTitle>
                     </DialogHeader>

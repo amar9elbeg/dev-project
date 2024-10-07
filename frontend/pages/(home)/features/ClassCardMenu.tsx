@@ -35,9 +35,9 @@ export const ClassCardMenu = (props: ClassCardMenuProps) => {
 
   return (
     <DropdownMenu>
-    <DropdownMenuTrigger data-testid='menu-icon' className='cursor-pointer'> <Ellipsis/></DropdownMenuTrigger>
-    <DropdownMenuContent align='end'>
-        <DropdownMenuItem className='flex justify-start gap-3' onClick={()=>openAdjustModal()}>
+    <DropdownMenuTrigger data-cy='HomePage-ClassCard-DropDownMenu-Menu-Button' className='cursor-pointer'> <Ellipsis/></DropdownMenuTrigger>
+    <DropdownMenuContent align='end' data-cy='HomePage-ClassCard-DropDownMenu-Menu-Content'>
+        <DropdownMenuItem className='flex justify-start gap-3' onClick={()=>openAdjustModal()} data-cy='HomePage-ClassCard-DropDownMenu-Edit-Button'>
             <Edit className='w-4 h-4' data-testid='edit-icon'/>
             <p>Засах</p>
         </DropdownMenuItem>

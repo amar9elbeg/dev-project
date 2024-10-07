@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {  Topic } from '@/generated';
-import { TopicDropDownMenu } from '../../components/TopicDropDownMenu';
+import { TopicDropDownMenu } from './TopicDropDownMenu';
 
 type TopicTableProps = {
   data: Topic[]; 

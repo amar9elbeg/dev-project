@@ -18,6 +18,7 @@ export const RadioButton = ({ label, radioButtonValue, ...props}: MyRadioButtonI
         {...field} 
         {...props}
         checked={radioButtonValue === props.value}
+        data-cy={`HomePage-Modal-${props.value}-RadioButton`}
       />
       <span className='ml-2'>{label}</span>
     </label>

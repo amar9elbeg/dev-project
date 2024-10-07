@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 interface AdjustClassModal {
   value: boolean;
   setValue: Dispatch<SetStateAction<boolean>>;
-  adjustClassData: Class | undefined;
+  adjustClassData: Class |undefined ;
   refreshClassesData: () => void;
 }
 
@@ -28,7 +28,7 @@ export const AdjustClassModal = ({ value, setValue, adjustClassData, refreshClas
     teacherName2: adjustClassData?.teachers?.[1] ?? '',
     startDate: adjustClassData?.startDate,
     endDate: adjustClassData?.endDate,
-    type: adjustClassData?.type,
+    type: adjustClassData?.type ?? 'CODING',
   }
 
   const updateFunction = async (values: formikValue) => {
@@ -49,18 +49,15 @@ export const AdjustClassModal = ({ value, setValue, adjustClassData, refreshClas
       autoClose: 2000,
       position: 'bottom-right'
     });
-    try {
       await promise;
       await refreshClassesData();
-    } catch (err) {
-      console.error("Error updating class:", err);
-    }
+
   }
 
   return (
     <div>
       <Dialog open={value} onOpenChange={setValue}>
-        <DialogContent>
+        <DialogContent data-cy="HomePage-Adjust-Class-Modal">
           <DialogHeader>
             <DialogTitle>Анги нэмэх</DialogTitle>
           </DialogHeader>
@@ -87,8 +84,8 @@ export const AdjustClassModal = ({ value, setValue, adjustClassData, refreshClas
                       <DatePicker label="Дуусах огноо:" name="endDate" />
                     </div>
                     <div role="group" aria-labelledby="my-radio-group" className='grid grid-cols-2 gap-x-5'>
-                      <RadioButton label='Кодинг анги' name='type' value='CODING' radioButtonValue={values.type ?? 'CODING'} />
-                      <RadioButton label='Дизайн анги' name='type' value='DESIGN' radioButtonValue={values.type ?? 'CODING'} />
+                      <RadioButton label='Кодинг анги' name='type' value='CODING' radioButtonValue={values.type} />
+                      <RadioButton label='Дизайн анги' name='type' value='DESIGN' radioButtonValue={values.type} />
                     </div>
                     <DialogFooter className='mt-5'>
                       <DialogClose asChild>

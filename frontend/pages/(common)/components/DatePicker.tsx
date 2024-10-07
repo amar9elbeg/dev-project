@@ -36,6 +36,8 @@ export const DatePicker = ({ name, ...props }: DatePickerProps) => {
             )}
             onClick={() => setFieldTouched(name, true)}
             data-testid="date-input-button"
+            data-cy={`HomePage-Modal-DatePicker-${name}-Button`}
+            
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {value ? format(new Date(value), "PPP") : <span>Огноо оруулна уу.</span>}
