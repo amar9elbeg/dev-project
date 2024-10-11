@@ -14,18 +14,25 @@ export const attendanceTypeDefs = gql`
     }
 
     type Attendance {
-        _id: ID
-        classId: ID
-        studentId: ID
-        date: Date
+        _id: ID!
+        classId: ID!
+        studentId: ID!
+        topicId: ID!
+        topicFeedback: String!
+        topicAssessment: Int!
+        date: Date!
+        status: AttendanceStatus!
         createdAt: Date
-        status: AttendanceStatus
+        updatedAt: Date
     }
 
     input CreateAttendanceInput {
         classId: ID!
         studentId: ID!
         date: Date!
+        topicId: ID!
+        topicFeedback: String!
+        topicAssessment: Int!
         status: AttendanceStatus!
     }
 

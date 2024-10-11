@@ -14,11 +14,9 @@ export interface AddReportStepProps {
 }
 
 export const AddReportStep2 = ({ reportInput, setReportInput, currentSlideIndex, setCurrentSlideIndex }: AddReportStepProps) => {
-    console.log(reportInput?.endDate, reportInput?.startDate);
 
     const startDate = new Date(reportInput?.startDate)
     const endDate = new Date(reportInput?.endDate)
-    console.log("after", startDate, endDate);
 
     const dates: Date[] = []
     const [selectedDays, setSelectedDays] = useState<string[]>(reportInput?.selectedDate);
@@ -28,7 +26,6 @@ export const AddReportStep2 = ({ reportInput, setReportInput, currentSlideIndex,
         const newDate = new Date(startDate)
         dates.push(newDate)
     }
-    console.log('dates', dates);
 
     function formattedDate(day: Date) {
         const dayNames = ['Ням', 'Даваа', 'Мягмар', 'Лхагва', 'Пүрэв', 'Баасан', 'Бямба'];
@@ -44,7 +41,7 @@ export const AddReportStep2 = ({ reportInput, setReportInput, currentSlideIndex,
             } else {
                 return [...prevSelectedDays, dayISO];
             }
-        });
+        });        
     };
 
     const submitFunction = () => {
@@ -53,11 +50,11 @@ export const AddReportStep2 = ({ reportInput, setReportInput, currentSlideIndex,
     }
 
     const previusSlide=()=>{
-        setCurrentSlideIndex(1)
+        setCurrentSlideIndex(0)
     }
 
     return (
-        <div>
+        <div className='flex flex-col gap-1 px-5'>
             {
                 dates.map((day) =>
                     <label>
@@ -65,7 +62,7 @@ export const AddReportStep2 = ({ reportInput, setReportInput, currentSlideIndex,
                     </label>
                 )
             }
-            <footer className='flex justify-between items-end'>
+            <footer className='flex justify-between items-end mt-10'>
                 <button className='bg-black text-white p-2 rounded-lg' onClick={previusSlide} >
                     <ArrowLeft/>
                 </button>

@@ -8,15 +8,15 @@ export const studentTypeDefs = gql`
     #Student
 
     type Student {
-        _id: ID 
-        firstName: String
-        lastName: String
-        studentCode: String
-        profileImageUrl: String
-        classId: ID
-        active: Boolean
-        phoneNumber: String
-        email: String
+        _id: ID! 
+        firstName: String!
+        lastName: String!
+        studentCode: String!
+        profileImageUrl: String!
+        classId: ID!
+        active: Boolean!
+        phoneNumber: String!
+        email: String!
     }
 
     input CreateStudentInput {
@@ -24,10 +24,10 @@ export const studentTypeDefs = gql`
         lastName: String!
         studentCode: String!
         profileImageUrl: String
-        classId: ID
-        phoneNumber: String
-        email: String
-        active: Boolean
+        classId: ID!
+        phoneNumber: String!
+        email: String!
+        active: Boolean!
     }
 
 

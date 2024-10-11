@@ -9,24 +9,24 @@ export const topicTypeDefs = gql`
     scalar Date
 
     type Topic {
-        _id: ID
+        _id: ID!
         name: String!
         description: String!
-        defaultFeedbackGood: String
-        defaultFeedbackMedium: String
-        defaultFeedbackNotEnough: String
-        classId: ID
-        active: Boolean
+        defaultFeedbackGood: String!
+        defaultFeedbackMedium: String!
+        defaultFeedbackNotEnough: String!
+        classId: ID!
+        active: Boolean!
     }
 
     input CreateTopicInput {
         name: String!
-        description: String
-        defaultFeedbackGood: String
-        defaultFeedbackMedium: String
-        defaultFeedbackNotEnough: String
-        classId: ID
-        active: Boolean
+        description: String!
+        defaultFeedbackGood: String!
+        defaultFeedbackMedium: String!
+        defaultFeedbackNotEnough: String!
+        classId: ID!
+        active: Boolean!
     }
 
     type Query {

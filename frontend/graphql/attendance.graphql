@@ -1,0 +1,14 @@
+mutation CreateAttendanceMutation($input: CreateAttendanceInput) {
+  createAttendanceMutation(input: $input) {
+    _id
+    classId
+    studentId
+    topicId
+    topicFeedback
+    topicAssessment
+    date
+    status
+    createdAt
+    updatedAt
+  }
+}

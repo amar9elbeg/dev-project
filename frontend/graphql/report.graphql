@@ -1,0 +1,19 @@
+mutation CreateReportMutation($input: CreateReportInput) {
+  createReportMutation(input: $input) {
+    _id
+    classId
+    topics
+    days
+    createdAt
+  }
+}
+
+query GetReportByDate($filter: ReportByClassId) {
+  getReportByDate(filter: $filter) {
+    _id
+    classId
+    topics
+    days
+    createdAt
+  }
+}

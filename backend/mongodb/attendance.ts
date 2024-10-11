@@ -11,6 +11,11 @@ const AttendanceSchema = new Schema({
         ref: "student",
         required: [true, "please insert student id"],
     }, 
+    topicId: {
+        type: Schema.ObjectId,
+        ref: "topic",
+        required: [true, "please insert topic id"],
+    }, 
     status:{
         type: String,
         enum: ['PRESENT', 'ABSENT','LATE', 'EXCUSED','SICK'],
@@ -19,6 +24,14 @@ const AttendanceSchema = new Schema({
     date: {
         type: Date,
         required: [true, "please insert attendance date"],
+    },
+    topicFeedback: {
+        type: String,
+        required: [true, "please insert topic feedback status"],
+    },
+    topicAssessment: {
+        type: Number,
+        required: [true, "please insert topic assessment status"],
     },
     createdAt: {
         type: Date,

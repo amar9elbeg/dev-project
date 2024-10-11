@@ -17,6 +17,8 @@ import {  editAttendanceMutation } from './mutations/edit-attendance'
 import {  createAttendanceMutation } from './mutations/create-attendance'
 import { getTopicByIdQuery } from './queries/get-topicById'
 import { getTopicByClassIdQuery } from './queries/get-topicByClassId'
+import { getReportByClassIdQuery } from './queries/get-reportByClass'
+import { createReportMutation } from './mutations/create-report'
 // import {createImageUrl} from './mutations/creaye-imageUrl'
 
 
@@ -29,7 +31,8 @@ export const resolvers = {
         getTopicsQuery, 
         getTopicByIdQuery, 
         getAttendanceByDateQuery,
-        getTopicByClassIdQuery
+        getTopicByClassIdQuery,
+        getReportByClassIdQuery
      },
     Mutation: { 
         createClassMutation , 
@@ -43,5 +46,6 @@ export const resolvers = {
         deleteTopicMutation, 
         editAttendanceMutation, 
         createAttendanceMutation,
+        createReportMutation
     }
 } as any

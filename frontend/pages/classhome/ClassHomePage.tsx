@@ -67,6 +67,8 @@ export const ClassHomePage = ({ classId }: { classId: string | string[] | undefi
         } else {
             return (<ReportSection selectedTab={selectedTab}
                 reportsDataByClassId={studentsDataByClassId}
+                studentsDataByClassId={studentsDataByClassId}
+                topicsDataByClassId={topicsDataByClassId}
                 refreshReportsData={refetchTopicsData}
                 reportsLoading={topicsLoading}
                 reportsError={topicsError} />)

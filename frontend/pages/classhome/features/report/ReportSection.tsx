@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Student } from '@/generated'
+import { Topic, Student } from '@/generated'
 import { HeaderMap } from '../utils/Utils'
 import { Button } from '@/pages/(common)/components/Button'
 import { Search } from 'lucide-react'
@@ -9,15 +9,17 @@ import { AddReportModal } from './AddReportModal'
 type TopicSectionProps = {
     selectedTab: string,
     reportsDataByClassId: Student[],
+    studentsDataByClassId: Student[],
+    topicsDataByClassId: Topic[],
     refreshReportsData: () => void;
     reportsLoading: boolean;
     reportsError: any
 }
 
-export const ReportSection = ({ selectedTab, reportsDataByClassId, refreshReportsData, reportsLoading, reportsError }: TopicSectionProps) => {
+export const ReportSection = ({ selectedTab, reportsDataByClassId,topicsDataByClassId, studentsDataByClassId, refreshReportsData, reportsLoading, reportsError }: TopicSectionProps) => {
     const [openAddReportModal, setOpenAddReportModal] = useState(false)
     const [openAdjustReportModal, setOpenAdjustReportModal] = useState(false)
-    const [adjustReportData, setAdjustReportData] = useState<Student>()
+    const [adjustReportData, setAdjustReportData] = useState<Topic>()
     const [search, setSearch] = useState<string>("")
 
     const filteredReportData = reportsDataByClassId?.filter((report) => {
@@ -40,7 +42,7 @@ export const ReportSection = ({ selectedTab, reportsDataByClassId, refreshReport
 
             </div>
 
-            <AddReportModal value={openAddReportModal} setValue={setOpenAddReportModal} refreshReportsData={refreshReportsData} />
+            <AddReportModal value={openAddReportModal} setValue={setOpenAddReportModal} refreshReportsData={refreshReportsData} topicsDataByClassId={topicsDataByClassId}/>
         </div>
     )
 }
