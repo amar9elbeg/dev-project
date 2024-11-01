@@ -1,3 +1,4 @@
+import { getReportByClassIdQuery } from './../resolvers/queries/get-reportByClass';
 import { gql } from 'graphql-tag'
 
 export const reportTypeDefs = gql`
@@ -27,7 +28,7 @@ export const reportTypeDefs = gql`
     }
 
     type Query {
-        getReportByDate(filter: ReportByClassId): [Report] 
+        getReportByClassIdQuery(classId: ID!): [Report] 
     }
 
     type Mutation {

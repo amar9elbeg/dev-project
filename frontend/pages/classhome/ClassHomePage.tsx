@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { HeaderEachClass } from "../(common)/components/HeaderEachClass";
-import { Class, useGetClassByIdQueryQuery, useGetStudentsByClassIdQueryQuery, Student, Topic, useGetTopicByClassIdQueryQuery } from "@/generated";
+import { Class, useGetClassByIdQueryQuery, useGetStudentsByClassIdQueryQuery, Student, Topic, useGetTopicByClassIdQueryQuery, useGetReportByClassIdQueryQuery, Report } from "@/generated";
 import { ToastContainer, } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClassItemTabs } from './features/ClassItemTabs';
@@ -27,12 +27,12 @@ export const ClassHomePage = ({ classId }: { classId: string | string[] | undefi
     const { data: topicsDataResponse, loading: topicsLoading, error: topicsError, refetch: refetchTopicsData } = useGetTopicByClassIdQueryQuery({
         variables: { classId: classCode }
     });
-    console.log("/topic raw", topicsDataResponse);
-
     const topicsDataByClassId: Topic[] = topicsDataResponse?.getTopicByClassIdQuery
-    console.log("/topic ", topicsDataByClassId)
 
     //report data
+    const {data: reportDataResponse, loading: reportLoading, error: reportsError, refetch: refreshReportsData}= useGetReportByClassIdQueryQuery({variables:{classId: classCode}})
+    const reportsDataByClassId: Report[] = reportDataResponse?.getReportByClassIdQuery
+    
 
 
     const [selectedTab, setSelectedTab] = useState('student')
@@ -66,12 +66,12 @@ export const ClassHomePage = ({ classId }: { classId: string | string[] | undefi
                 topicsError={topicsError} />)
         } else {
             return (<ReportSection selectedTab={selectedTab}
-                reportsDataByClassId={studentsDataByClassId}
+                reportsDataByClassId={reportsDataByClassId}
                 studentsDataByClassId={studentsDataByClassId}
                 topicsDataByClassId={topicsDataByClassId}
-                refreshReportsData={refetchTopicsData}
-                reportsLoading={topicsLoading}
-                reportsError={topicsError} />)
+                refreshReportsData={refreshReportsData}
+                reportsLoading={reportLoading}
+                reportsError={reportsError} />)
         }
     }
 

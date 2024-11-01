@@ -28,7 +28,7 @@ export const AddReportStep1 = ({ reportInput, setReportInput, currentSlideIndex,
     }
 
     const submitFunction = (value: datesType) => {
-        setReportInput((prevInput) => ({ ...prevInput, ...value }));
+        setReportInput((prevInput) => ({ ...prevInput, ...value }));        
         setCurrentSlideIndex(1);
     }
 

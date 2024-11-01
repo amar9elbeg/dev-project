@@ -53,8 +53,8 @@ export const AddReportModal = ({ value, setValue, refreshReportsData , topicsDat
                     <div className="gap-10 my-5">
                         <ul className="steps lg:steps-horizontal w-full text-sm pb-10">
                             <li className="step step-neutral">Ирц</li>
-                            <li className={`step ${currentSlideIndex == 3 ? 'step-neutral' : ''}`}>Сэдэв</li>
-                            <li className={`step ${currentSlideIndex == 4 ? 'step-neutral' : ''}`}>Хянах</li>
+                            <li className={`step ${currentSlideIndex == 2 ? 'step-neutral' : ''}`}>Сэдэв</li>
+                            <li className={`step ${currentSlideIndex == 3 ? 'step-neutral' : ''}`}>Хянах</li>
                         </ul>
                         {slides[currentSlideIndex] && (
                             <div style={{ width: '100%' }}>

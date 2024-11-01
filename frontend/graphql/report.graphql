@@ -8,8 +8,8 @@ mutation CreateReportMutation($input: CreateReportInput) {
   }
 }
 
-query GetReportByDate($filter: ReportByClassId) {
-  getReportByDate(filter: $filter) {
+query GetReportByClassIdQuery($classId: ID!) {
+  getReportByClassIdQuery(classId: $classId) {
     _id
     classId
     topics

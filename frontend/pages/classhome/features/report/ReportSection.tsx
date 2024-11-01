@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
-import { Topic, Student } from '@/generated'
+import { Topic, Student, Report } from '@/generated'
 import { HeaderMap } from '../utils/Utils'
 import { Button } from '@/pages/(common)/components/Button'
 import { Search } from 'lucide-react'
 import { AddReportModal } from './AddReportModal'
+import { ReportTable } from './ReportTable'
 
 
-type TopicSectionProps = {
+type ReportSectionProps = {
     selectedTab: string,
-    reportsDataByClassId: Student[],
     studentsDataByClassId: Student[],
     topicsDataByClassId: Topic[],
+    reportsDataByClassId: Report[],
     refreshReportsData: () => void;
     reportsLoading: boolean;
     reportsError: any
 }
 
-export const ReportSection = ({ selectedTab, reportsDataByClassId,topicsDataByClassId, studentsDataByClassId, refreshReportsData, reportsLoading, reportsError }: TopicSectionProps) => {
+export const ReportSection = ({ selectedTab, reportsDataByClassId,topicsDataByClassId, studentsDataByClassId, refreshReportsData, reportsLoading, reportsError }: ReportSectionProps) => {
     const [openAddReportModal, setOpenAddReportModal] = useState(false)
     const [openAdjustReportModal, setOpenAdjustReportModal] = useState(false)
     const [adjustReportData, setAdjustReportData] = useState<Topic>()
@@ -39,8 +40,8 @@ export const ReportSection = ({ selectedTab, reportsDataByClassId,topicsDataByCl
                     <input type='text' className='p-2  placeholder:italic rounded-r-lg' placeholder={` Search report`} onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <Button text={`${monHeader} +`} value={openAddReportModal} setValue={setOpenAddReportModal} />
-
             </div>
+            <ReportTable studentData={studentsDataByClassId} />
 
             <AddReportModal value={openAddReportModal} setValue={setOpenAddReportModal} refreshReportsData={refreshReportsData} topicsDataByClassId={topicsDataByClassId}/>
         </div>

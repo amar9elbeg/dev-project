@@ -16,15 +16,15 @@ export interface AddReportStepProps {
 export const AddReportStep2 = ({ reportInput, setReportInput, currentSlideIndex, setCurrentSlideIndex }: AddReportStepProps) => {
 
     const startDate = new Date(reportInput?.startDate)
-    const endDate = new Date(reportInput?.endDate)
+    const endDate = new Date(reportInput?.endDate)    
 
     const dates: Date[] = []
     const [selectedDays, setSelectedDays] = useState<string[]>(reportInput?.selectedDate);
 
-    while (startDate < endDate) {
+    while (startDate < endDate) {        
         startDate.setDate(startDate.getDate() + 1)
         const newDate = new Date(startDate)
-        dates.push(newDate)
+        dates.push(newDate)        
     }
 
     function formattedDate(day: Date) {
