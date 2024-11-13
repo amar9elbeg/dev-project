@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Topic, Student, Report } from '@/generated'
+import { Topic, Student, Report, ReportPopulate } from '@/generated'
 import { HeaderMap } from '../utils/Utils'
 import { Button } from '@/pages/(common)/components/Button'
 import { Search } from 'lucide-react'
@@ -11,7 +11,7 @@ type ReportSectionProps = {
     selectedTab: string,
     studentsDataByClassId: Student[],
     topicsDataByClassId: Topic[],
-    reportsDataByClassId: Report[],
+    reportsDataByClassId: ReportPopulate[],
     refreshReportsData: () => void;
     reportsLoading: boolean;
     reportsError: any
@@ -41,7 +41,7 @@ export const ReportSection = ({ selectedTab, reportsDataByClassId,topicsDataByCl
                 </div>
                 <Button text={`${monHeader} +`} value={openAddReportModal} setValue={setOpenAddReportModal} />
             </div>
-            <ReportTable studentData={studentsDataByClassId} />
+            <ReportTable studentData={studentsDataByClassId} topicsDataByClassId={topicsDataByClassId} reportsLoading={reportsLoading} reportsDataByClassId={reportsDataByClassId} refreshReportsData={refreshReportsData} reportsError={reportsError} />
 
             <AddReportModal value={openAddReportModal} setValue={setOpenAddReportModal} refreshReportsData={refreshReportsData} topicsDataByClassId={topicsDataByClassId}/>
         </div>

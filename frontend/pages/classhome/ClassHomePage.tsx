@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { HeaderEachClass } from "../(common)/components/HeaderEachClass";
-import { Class, useGetClassByIdQueryQuery, useGetStudentsByClassIdQueryQuery, Student, Topic, useGetTopicByClassIdQueryQuery, useGetReportByClassIdQueryQuery, Report } from "@/generated";
+import { Class, useGetClassByIdQueryQuery, useGetStudentsByClassIdQueryQuery, Student, Topic, useGetTopicByClassIdQueryQuery, Report, useGetReportPopulateByClassIdQueryQuery, ReportPopulate } from "@/generated";
 import { ToastContainer, } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClassItemTabs } from './features/ClassItemTabs';
@@ -30,9 +30,9 @@ export const ClassHomePage = ({ classId }: { classId: string | string[] | undefi
     const topicsDataByClassId: Topic[] = topicsDataResponse?.getTopicByClassIdQuery
 
     //report data
-    const {data: reportDataResponse, loading: reportLoading, error: reportsError, refetch: refreshReportsData}= useGetReportByClassIdQueryQuery({variables:{classId: classCode}})
-    const reportsDataByClassId: Report[] = reportDataResponse?.getReportByClassIdQuery
-    
+    const { data: reportDataResponse, loading: reportLoading, error: reportsError, refetch: refreshReportsData } = useGetReportPopulateByClassIdQueryQuery({ variables: { classId: classCode } })
+    const reportsDataByClassId: ReportPopulate[] = reportDataResponse?.getReportPopulateByClassIdQuery;    
+
 
 
     const [selectedTab, setSelectedTab] = useState('student')

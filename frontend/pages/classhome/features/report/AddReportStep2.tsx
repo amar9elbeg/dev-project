@@ -22,9 +22,9 @@ export const AddReportStep2 = ({ reportInput, setReportInput, currentSlideIndex,
     const [selectedDays, setSelectedDays] = useState<string[]>(reportInput?.selectedDate);
 
     while (startDate < endDate) {        
-        startDate.setDate(startDate.getDate() + 1)
         const newDate = new Date(startDate)
         dates.push(newDate)        
+        startDate.setDate(startDate.getDate() + 1)
     }
 
     function formattedDate(day: Date) {
@@ -56,8 +56,8 @@ export const AddReportStep2 = ({ reportInput, setReportInput, currentSlideIndex,
     return (
         <div className='flex flex-col gap-1 px-5'>
             {
-                dates.map((day) =>
-                    <label>
+                dates.map((day, index) =>
+                    <label key={index}>
                         <input type='checkbox' checked={selectedDays.includes(day.toISOString())} onChange={() => handleCheckboxChange(day)} /> {formattedDate(day)}
                     </label>
                 )

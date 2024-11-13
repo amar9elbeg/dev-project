@@ -35,7 +35,7 @@ export const HomePage = () => {
           <div className="w-full grid grid-cols-4 my-10 gap-5">
             {filteredClasses.map((each: Class) =>
             (
-              <Classcard classData={each} value={openAdjustClassModal} setValue={setOpenAdjustClassModal} setAdjustData={setAdjustClassData} refreshClassesData={refetch} />
+              <Classcard key={each._id} classData={each} value={openAdjustClassModal} setValue={setOpenAdjustClassModal} setAdjustData={setAdjustClassData} refreshClassesData={refetch} />
             )
             )}
           </div>

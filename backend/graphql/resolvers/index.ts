@@ -19,6 +19,7 @@ import { getTopicByIdQuery } from './queries/get-topicById'
 import { getTopicByClassIdQuery } from './queries/get-topicByClassId'
 import { getReportByClassIdQuery } from './queries/get-reportByClass'
 import { createReportMutation } from './mutations/create-report'
+import { getReportPopulateByClassIdQuery } from './queries/get-reportPopulateByClass'
 // import {createImageUrl} from './mutations/creaye-imageUrl'
 
 
@@ -32,7 +33,8 @@ export const resolvers = {
         getTopicByIdQuery, 
         getAttendanceByDateQuery,
         getTopicByClassIdQuery,
-        getReportByClassIdQuery
+        getReportByClassIdQuery,
+        getReportPopulateByClassIdQuery
      },
     Mutation: { 
         createClassMutation , 

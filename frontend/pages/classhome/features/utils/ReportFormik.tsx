@@ -14,8 +14,8 @@ export const initialReportInput = {
 export type reportInputType ={
     startDate: string,
     endDate: string,
-    selectedDate: string[]
-    selectedTopics: string[]
+    selectedDate: string[],
+    selectedTopics: string[],
 }
 
 export const dayMap: { [key: string]: string } = {

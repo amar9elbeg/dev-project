@@ -1,30 +1,35 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import { Student } from '@/generated';
+import React, {  useState } from 'react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Student, Topic, ReportPopulate } from '@/generated';
+import { Input } from "@/components/ui/input"
+import { SelectorCustom } from '@/pages/(common)/components/SelectorCustom';
+import { Checkbox } from "@/components/ui/checkbox"
+
 
 type ReportTableProps = {
     studentData: Student[];
-    reportsDataByClassId: Report[],
+    reportsDataByClassId: ReportPopulate[];
     refreshReportsData: () => void;
+    topicsDataByClassId: Topic[],
     reportsLoading: boolean;
-    reportsError: any
-
-    //   value: boolean;
-    //   setValue: Dispatch<SetStateAction<boolean>>;
-    //   setAdjustStudentData: Dispatch<SetStateAction<Student | undefined>>;
-    //   refreshStudentsData: () => void;
+    reportsError: any;
 };
 
-export const ReportTable = ({ studentData }: ReportTableProps) => {
-    console.log('student data', studentData);
-    let number = 0
+export const ReportTable = ({ studentData, reportsDataByClassId, refreshReportsData, reportsLoading, reportsError, topicsDataByClassId }: ReportTableProps) => {
+    let number = 1
+
+    const [reportTopics, setReportTopics] = useState<Topic[]>([]);
+    const [reportDate, setReportDate] = useState<string[]>([]);
+
+    const topicList = reportsDataByClassId.flatMap((report) => report.topics)
+    const topicDate = reportsDataByClassId.flatMap((report) => report.days)
+
+    const dateFormatReportTable = (date: string) => {
+        const [year, month, day] = date.split("T")[0].split("-");
+        return `${month}/${day}`;
+    }
+
+    const feedbackcollector = (value: string) => { console.log(value) }
 
     return (
         <div className='rounded-lg border-gray-300 border'>
@@ -47,13 +52,39 @@ export const ReportTable = ({ studentData }: ReportTableProps) => {
                             <TableRow key={each._id}>
                                 <TableCell>{number++}</TableCell>
                                 <TableCell> <p className='uppercase'>{each.lastName[0]}</p>.<p className='capitalize'>{each.firstName}</p></TableCell>
-                                <TableCell>topic</TableCell>
-                                <TableCell>note</TableCell>
-                                <TableCell>valuation</TableCell>
-                                <TableCell>active</TableCell>
-                                <TableCell>status</TableCell>
-                                <TableCell>sent</TableCell>
-
+                                <TableCell>
+                                    {topicList.map((topic) => <p key={topic._id}>{topic.name}</p>)}
+                                </TableCell>
+                                <TableCell>
+                                    {topicList.map((topic) =>
+                                        <SelectorCustom
+                                            key={topic._id}
+                                            content={[topic.defaultFeedbackGood, topic.defaultFeedbackMedium, topic.defaultFeedbackNotEnough]}
+                                            feedbackOnValueChange={feedbackcollector}
+                                        />
+                                    )}
+                                </TableCell>
+                                <TableCell>
+                                    {topicList.map((topic) =>
+                                        <div key={topic._id} className='flex' >
+                                            <Input type='number' />
+                                            <p>%</p>
+                                        </div>
+                                    )}
+                                </TableCell>
+                                <TableCell>
+                                    {topicDate.map((date, index) =>
+                                        <div key={index} className='flex'>
+                                            <p>{dateFormatReportTable(date)}</p>
+                                            <SelectorCustom
+                                                content={["ирсэн", "ирээгүй"]}
+                                                feedbackOnValueChange={feedbackcollector}
+                                            />
+                                        </div>
+                                    )}
+                                </TableCell>
+                                <TableCell><Checkbox defaultChecked /></TableCell>
+                                <TableCell></TableCell>
                             </TableRow>
                         ))
                     ) : (

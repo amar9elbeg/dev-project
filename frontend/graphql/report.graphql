@@ -8,12 +8,38 @@ mutation CreateReportMutation($input: CreateReportInput) {
   }
 }
 
+fragment Topic on Topic {
+      _id
+      name
+      description
+      defaultFeedbackGood
+      defaultFeedbackMedium
+      defaultFeedbackNotEnough
+}
+
+query GetReportPopulateByClassIdQuery($classId: ID!) {
+  getReportPopulateByClassIdQuery(classId: $classId) {
+    _id
+    classId
+    topics {
+      _id
+      name
+      description
+      defaultFeedbackGood
+      defaultFeedbackMedium
+      defaultFeedbackNotEnough
+    }
+    days
+    createdAt
+  }
+}
+
 query GetReportByClassIdQuery($classId: ID!) {
   getReportByClassIdQuery(classId: $classId) {
     _id
     classId
-    topics
     days
     createdAt
+    topics 
   }
 }

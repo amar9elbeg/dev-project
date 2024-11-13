@@ -21,7 +21,7 @@ export interface AddReportStepProps {
 
 export const AddReportStep3 = ({ reportInput, setReportInput, currentSlideIndex, setCurrentSlideIndex, topicsDataByClassId }: AddReportStepProps) => {
     const [selectedTopics, setSelectedTopics]= useState<string[]>([])
-    const [selector, setSelector]= useState<{ id: number }[]>([])
+    const [selector, setSelector]= useState<{ id: number, topic?: string  }[]>([])
     const [addSelectButtonDisable, setAddSelectButtonDisable]= useState(false)
 
     const submitFunction = () => {
@@ -33,7 +33,7 @@ export const AddReportStep3 = ({ reportInput, setReportInput, currentSlideIndex,
         const updateSelectedTopics=[...selectedTopics];
         updateSelectedTopics[id] = value;
         setSelectedTopics(updateSelectedTopics);
-        
+        setSelector((prevSelector) => [...prevSelector, { id: id, topic: value }]);
     }
 
     const previusSlide = () => {
@@ -47,20 +47,19 @@ export const AddReportStep3 = ({ reportInput, setReportInput, currentSlideIndex,
          } else{
             setAddSelectButtonDisable(true)
          }
-
     }
 
     return (
         <div className='flex flex-col px-5'>
 
 
-            {selector?.map((selector) => (
-                <Select key={selector.id} onValueChange={(value) => handleSelectChange(value, selector.id)} >
+            {selector?.map((selector, index) => (
+                <Select key={index} onValueChange={(value) => handleSelectChange(value, selector.id)} >
                     <SelectTrigger className="w-full my-3 bg-gray-100">
                         <SelectValue placeholder="Сэдэв сонгох" />
                     </SelectTrigger>
                     <SelectContent >
-                        {topicsDataByClassId?.map((topic: Topic) => <SelectItem value={topic._id} >{topic.name}</SelectItem>)}
+                        {topicsDataByClassId?.map((topic: Topic, index) => <SelectItem key={index} value={topic._id} >{topic.name}</SelectItem>)}
                     </SelectContent>
                 </Select>
 

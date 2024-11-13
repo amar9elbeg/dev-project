@@ -1,4 +1,3 @@
-import { getReportByClassIdQuery } from './../resolvers/queries/get-reportByClass';
 import { gql } from 'graphql-tag'
 
 export const reportTypeDefs = gql`
@@ -10,15 +9,22 @@ export const reportTypeDefs = gql`
     type Report {
         _id: ID!
         classId: ID!
-        topics: [ID]!
-        days: [Date]!
+        topics: [ID!]!
+        days: [Date!]!
+        createdAt: Date
+    }
+    type ReportPopulate {
+        _id: ID!
+        classId: ID!
+        topics: [Topic!]!
+        days: [Date!]!
         createdAt: Date
     }
 
     input CreateReportInput {
         classId: ID!
-        topics: [ID]!
-        days: [Date]!
+        topics: [ID!]!
+        days: [Date!]!
     }
 
     input ReportByClassId {
@@ -29,6 +35,7 @@ export const reportTypeDefs = gql`
 
     type Query {
         getReportByClassIdQuery(classId: ID!): [Report] 
+        getReportPopulateByClassIdQuery(classId: ID!): [ReportPopulate] 
     }
 
     type Mutation {

@@ -36,7 +36,7 @@ export const AddReportModal = ({ value, setValue, refreshReportsData , topicsDat
         <AddReportStep1 reportInput={reportInput} setReportInput={setReportInput} currentSlideIndex={currentSlideIndex} setCurrentSlideIndex={setCurrentSlideIndex} />,
         <AddReportStep2 reportInput={reportInput} setReportInput={setReportInput} currentSlideIndex={currentSlideIndex} setCurrentSlideIndex={setCurrentSlideIndex} />,
         <AddReportStep3 reportInput={reportInput} setReportInput={setReportInput} currentSlideIndex={currentSlideIndex} setCurrentSlideIndex={setCurrentSlideIndex} topicsDataByClassId={topicsDataByClassId} />,
-        <AddReportStep4 reportInput={reportInput} setReportInput={setReportInput} currentSlideIndex={currentSlideIndex} setCurrentSlideIndex={setCurrentSlideIndex} topicsDataByClassId={topicsDataByClassId} setValue={setValue} value={value}/>];
+        <AddReportStep4 reportInput={reportInput} setReportInput={setReportInput} currentSlideIndex={currentSlideIndex} setCurrentSlideIndex={setCurrentSlideIndex} topicsDataByClassId={topicsDataByClassId} setValue={setValue} value={value} refreshReportData={refreshReportsData}/>];
 
     const submitFunction = (value: any) => {
         console.log(value);
@@ -53,7 +53,7 @@ export const AddReportModal = ({ value, setValue, refreshReportsData , topicsDat
                     <div className="gap-10 my-5">
                         <ul className="steps lg:steps-horizontal w-full text-sm pb-10">
                             <li className="step step-neutral">Ирц</li>
-                            <li className={`step ${currentSlideIndex == 2 ? 'step-neutral' : ''}`}>Сэдэв</li>
+                            <li className={`step ${currentSlideIndex >= 2 ? 'step-neutral' : ''}`}>Сэдэв</li>
                             <li className={`step ${currentSlideIndex == 3 ? 'step-neutral' : ''}`}>Хянах</li>
                         </ul>
                         {slides[currentSlideIndex] && (
